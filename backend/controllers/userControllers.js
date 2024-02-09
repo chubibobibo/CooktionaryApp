@@ -12,7 +12,7 @@ export const userRegister = async (req, res) => {
   req.body.role = isAdmin === 0 ? "admin" : "user";
   try {
     const newUser = await UserModel.create(req.body);
-    res.status(200).json({ message: "New user registered" });
+    res.status(200).json({ message: "New user registered", newUser });
   } catch (err) {
     console.log(err);
   }
