@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+//import routes
+import userRoutes from "./routes/userRoutes.js";
+
 //instantiate express
 const app = express();
 
