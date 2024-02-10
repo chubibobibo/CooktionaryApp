@@ -21,12 +21,16 @@ const RecipeSchema = new Schema(
       },
     ],
     recipeInstructions: {
-      type: string,
+      type: String,
+      required: true,
+    },
+    cookingTime: {
+      type: Number,
       required: true,
     },
     createdBy: {
-      type: Schema.Types.ObjectId(),
-      ref: UserSchema,
+      type: Schema.Types.ObjectId,
+      ref: "UserSchema",
     },
   },
   { timestamps: true } //creates createdAt property for every entry
