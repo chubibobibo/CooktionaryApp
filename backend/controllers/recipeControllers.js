@@ -21,7 +21,6 @@ export const getAllRecipes = async (req, res) => {
   const allRecipes = await RecipeModel.find({}); //find all, returns an array
   if (allRecipes.length === 0) {
     throw new ExpressError("No recipes found", 404);
-    // res.status(400).json({ message: "No recipes found" });
   }
   res.status(200).json({ message: "Recipes found", allRecipes });
 };
