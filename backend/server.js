@@ -5,6 +5,7 @@ dotenv.config();
 
 //import routes
 import userRoutes from "./routes/userRoutes.js";
+import recipeRoutes from "./routes/recipeRoutes.js";
 
 //instantiate express
 const app = express();
@@ -21,6 +22,7 @@ async function main() {
 
 //routes
 app.use("/api/users/", userRoutes);
+app.use("/api/recipes/", recipeRoutes);
 
 //middleware for notfound page
 app.use("*", (req, res) => {
