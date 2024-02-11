@@ -49,3 +49,13 @@ export const editRecipe = async (req, res) => {
   }
   res.status(200).json({ message: `recipe ${id} updated` });
 };
+
+//delete recipe
+export const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const deletedRecipe = await RecipeModel.findByIdAndDelete(id);
+  if (!deletedRecipe) {
+    throw new ExpressError("cannot delete recipe", 404);
+  }
+  res.status(200).json({ message: "Recipe deleted" });
+};
