@@ -10,6 +10,7 @@ import mongoose from "mongoose";
 
 //if valid mongo id search for specific recipe
 import { RecipeModel } from "../models/RecipeSchema.js";
+import { UserModel } from "../models/UserSchema.js";
 
 //create a function that will handle the error
 //This function will accept an array (validateValues) of valeus to be validated.
@@ -71,4 +72,34 @@ export const validateParams = withValidationErrors([
       throw new ExpressError("no recipe with that ID", 404);
     }
   }),
+]);
+
+export const validateRegister = withValidationErrors([
+  body("name")
+    .notEmpty()
+    .withMessage("name cannot be empty")
+    .isLength({ max: 25 })
+    .withMessage("Name cannot exceed 25 characters"),
+  //check email for uniqueness
+  body("email")
+    .notEmpty()
+    .withMessage("Email cannot be empty")
+    .isEmail()
+    .withMessage("Should be a valid email")
+    .custom(async (email) => {
+      const foundEmail = await UserModel.findOne({ email: email }); //looking for the email passed as argument if exists in the database (UserModel).
+      if (foundEmail) {
+        throw new ExpressError("User already exist");
+      }
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("Password cannot be empty")
+    .isLength({ min: 8 })
+    .withMessage("Password must be greater than 8 characters"),
+  body("lastName")
+    .notEmpty()
+    .withMessage("Last name cannot be empty")
+    .isLength({ max: 25 })
+    .withMessage("Last name cannot exceed 25 characters"),
 ]);

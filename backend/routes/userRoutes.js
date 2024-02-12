@@ -3,6 +3,9 @@ import express from "express";
 import { userRegister } from "../controllers/userControllers.js";
 const router = express.Router();
 
-router.post("/register", userRegister);
+//input validation
+import { validateRegister } from "../middleware/inputValidation.js";
+
+router.post("/register", validateRegister, userRegister);
 
 export default router;
