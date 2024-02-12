@@ -2,7 +2,10 @@ import express from "express";
 const router = express.Router();
 
 //import input validator
-import { validateCreateRecipe } from "../middleware/inputValidation.js";
+import {
+  validateCreateRecipe,
+  validateParams,
+} from "../middleware/inputValidation.js";
 
 //recipe controller
 import {
@@ -15,8 +18,8 @@ import {
 
 router.get("/", getAllRecipes);
 router.post("/createRecipe", validateCreateRecipe, createRecipe);
-router.get("/:id", getSingleRecipe);
-router.patch("/:id", editRecipe);
-router.delete("/:id", deleteRecipe);
+router.get("/:id", validateParams, getSingleRecipe);
+router.patch("/:id", validateParams, editRecipe);
+router.delete("/:id", validateParams, deleteRecipe);
 
 export default router;
