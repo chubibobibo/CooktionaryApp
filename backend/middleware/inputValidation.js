@@ -5,6 +5,12 @@ import { dish } from "../utils/constants.js";
 //error handling
 import { ExpressError } from "../errors/ExpressError.js";
 
+//import mongoose needed in checking params
+import mongoose from "mongoose";
+
+//if valid mongo id search for specific recipe
+import { RecipeModel } from "../models/RecipeSchema.js";
+
 //create a function that will handle the error
 //This function will accept an array (validateValues) of valeus to be validated.
 //then this function will return the array we passed as an argument and an error response
@@ -51,4 +57,18 @@ export const validateCreateRecipe = withValidationErrors([
     .withMessage("Dish cannot be empty")
     .isIn(Object.values(dish))
     .withMessage("should be pork, chicken, beef, vegetarian, fish"),
+]);
+
+export const validateParams = withValidationErrors([
+  param("id").custom(async (id) => {
+    const validParam = mongoose.Types.ObjectId.isValid(id); //returns a boolean if valid mongo id
+    if (!validParam) {
+      throw new ExpressError("Not a valid mongo ID", 400);
+    }
+    //if param is valid mongo ID search for the specific recipe
+    const foundRecipe = await RecipeModel.findById(id);
+    if (!foundRecipe) {
+      throw new ExpressError("no recipe with that ID", 404);
+    }
+  }),
 ]);
