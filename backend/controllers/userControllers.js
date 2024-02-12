@@ -29,4 +29,10 @@ export const userRegister = async (req, res) => {
 };
 
 //logging in
-export const userLogin = (req, res) => {};
+export const userLogin = async (req, res) => {
+  if (!req.body) {
+    throw new ExpressError("No data provided", 400);
+  }
+  //find the user trying to login using the email from req.body
+  const foundUser = await UserSchema.findOne({ email: foundUser.email });
+};
