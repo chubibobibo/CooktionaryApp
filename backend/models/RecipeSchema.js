@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+//import for dish options enum
+import { dish } from "../utils/constants.js";
 
 const { Schema } = mongoose;
 
@@ -30,6 +32,11 @@ const RecipeSchema = new Schema(
     },
     cookingTime: {
       type: Number,
+      required: true,
+    },
+    dish: {
+      type: String,
+      enum: Object.values(dish),
       required: true,
     },
   },
