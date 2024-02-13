@@ -103,3 +103,16 @@ export const validateRegister = withValidationErrors([
     .isLength({ max: 25 })
     .withMessage("Last name cannot exceed 25 characters"),
 ]);
+
+export const validateLogin = withValidationErrors([
+  body("email")
+    .notEmpty()
+    .withMessage("email cannot be empty")
+    .isEmail()
+    .withMessage("Enter a valid email"),
+  body("password")
+    .notEmpty()
+    .withMessage("password cannot be empty")
+    .isLength({ min: 8 })
+    .withMessage("Password must be atleast 8 characters"),
+]);
