@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { UserModel } from "../models/UserSchema.js";
 //bcrypt to hash pswd.
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 //register
 export const userRegister = async (req, res) => {
@@ -34,5 +35,26 @@ export const userLogin = async (req, res) => {
     throw new ExpressError("No data provided", 400);
   }
   //find the user trying to login using the email from req.body
-  const foundUser = await UserSchema.findOne({ email: foundUser.email });
+  const foundUser = await UserModel.findOne({ email: req.body.email });
+  if (!foundUser) {
+    throw new ExpressError("Username or password is wrong", 400);
+  }
+  const loggedUser = bcrypt.compareSync(req.body.password, foundUser.password); //password from form compared to the password of the foundUser.
+  if (!loggedUser) {
+    throw new ExpressError("Wrong email or password", 400);
+  }
+  //implement jwt tokens
+  const token = jwt.sign(
+    { userId: foundUser._id, role: foundUser.role },
+    process.env.SECRET,
+    { expiresIn: "7d" }
+  );
+
+  //create cookies based on the jwt
+  res.cookie("recipeCookies", token, {
+    httpOnly: true, //prevents access of cookies in clientside
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), //1 week expiration
+    secure: process.env.NODE_ENV === "production",
+  });
+  res.status(200).json({ message: `Welcome ${foundUser.name}`, foundUser });
 };
