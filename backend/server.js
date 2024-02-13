@@ -1,7 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
+
+//import authorization middleware
+import { authenticationMiddleware } from "./middleware/authentication.js";
 
 //import routes
 import userRoutes from "./routes/userRoutes.js";
@@ -12,6 +16,8 @@ const app = express();
 
 //parse json
 app.use(express.json());
+//cookie parser
+app.use(cookieParser());
 
 //connection DB
 // getting-started.js
@@ -22,7 +28,7 @@ async function main() {
 
 //routes
 app.use("/api/users/", userRoutes);
-app.use("/api/recipes/", recipeRoutes);
+app.use("/api/recipes/", authenticationMiddleware, recipeRoutes);
 
 //middleware for notfound page
 app.use("*", (req, res) => {
