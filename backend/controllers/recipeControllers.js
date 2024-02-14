@@ -9,6 +9,8 @@ export const createRecipe = async (req, res) => {
   if (!req.body) {
     throw new ExpressError("No data received", 404);
   }
+  //UPDATE: adding a created by property
+  req.body.createdBy = req.user.userId;
   const newRecipe = await RecipeModel.create(req.body);
   if (!newRecipe) {
     throw ExpressError("No recipe created", 400);
@@ -18,7 +20,7 @@ export const createRecipe = async (req, res) => {
 
 //all recipes
 export const getAllRecipes = async (req, res) => {
-  const allRecipes = await RecipeModel.find({}); //find all, returns an array
+  const allRecipes = await RecipeModel.find({ createdBy: req.user.userId }); //find all recipe of logged user, returns an array
   if (allRecipes.length === 0) {
     throw new ExpressError("No recipes found", 404);
   }
@@ -32,6 +34,10 @@ export const getSingleRecipe = async (req, res) => {
   const singleRecipe = await RecipeModel.findById(id);
   if (!singleRecipe) {
     throw new ExpressError("Recipe not found", 404);
+  }
+  //limiting access of a single recipe depending if user is admin or the author.
+  if (req.user.role !== "admin" && singleRecipe.createdBy !== req.user.userId) {
+    throw new ExpressError("user not authorized");
   }
   res.status(200).json({ message: "Recipe found", singleRecipe });
 };
