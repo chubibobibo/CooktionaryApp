@@ -10,6 +10,7 @@ import { authenticationMiddleware } from "./middleware/authentication.js";
 //import routes
 import userRoutes from "./routes/userRoutes.js";
 import recipeRoutes from "./routes/recipeRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 //instantiate express
 const app = express();
@@ -29,6 +30,7 @@ async function main() {
 //routes
 app.use("/api/users/", userRoutes);
 app.use("/api/recipes/", authenticationMiddleware, recipeRoutes);
+app.use("/api/admin", authenticationMiddleware, adminRoutes); //authenticationMiddleware is needed because only logged in user can access all admin routes.To be able to obtain the logged user, we needed req.user object to be created and this only happens if we authenticate the admin route.
 
 //middleware for notfound page
 app.use("*", (req, res) => {
