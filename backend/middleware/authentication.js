@@ -19,3 +19,16 @@ export const authenticationMiddleware = (req, res, next) => {
     throw new ExpressError(err, 400);
   }
 };
+
+//isAdmin middleware
+export const isAdmin = (...roles) => {
+  //rest (...roles) will return all values of roles in an array
+  return (req, res, next) => {
+    //check whether the role of the logged in user (req.user.role) is included in the roles that was passed as an argument in the isAdmin function
+    const adminUser = roles.includes(req.user.role);
+    if (!adminUser) {
+      throw new ExpressError("User is not an admin");
+    }
+    next();
+  };
+};
