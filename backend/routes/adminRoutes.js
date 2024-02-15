@@ -3,8 +3,9 @@ import { Router } from "express";
 const router = express.Router();
 
 //import controller
-import { loggedUser } from "../controllers/adminControllers.js";
+import { loggedUser, appStats } from "../controllers/adminControllers.js";
 
 router.get("/loggedUser", loggedUser);
+router.get("/appStats", appStats);
 
 export default router;
