@@ -6,6 +6,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLayout from "./pages/HomeLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import DashboardLayout from "./pages/DashboardLayout.jsx";
+import AddRecipe from "./pages/AddRecipe.jsx";
+import EditRecipe from "./pages/EditRecipe.jsx";
+import Admin from "./pages/Admin.jsx";
+import Profile from "./pages/Profile.jsx";
+import Index from "./pages/Index.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
@@ -13,7 +20,12 @@ function App() {
     {
       path: "/",
       element: <HomeLayout />,
+      errorElement: <ErrorPage />, // renders the ErrorPage.jsx
       children: [
+        {
+          index: true,
+          element: <Index />,
+        },
         {
           path: "login", //no need for "/" because path is relative to parent (HomeLayout)
           element: <Login />,
@@ -21,6 +33,28 @@ function App() {
         {
           path: "register",
           element: <Register />,
+        },
+        {
+          path: "dashboard",
+          element: <DashboardLayout />,
+          children: [
+            {
+              path: "add-recipe",
+              element: <AddRecipe />,
+            },
+            {
+              path: "edit-recipe",
+              element: <EditRecipe />,
+            },
+            {
+              path: "profile",
+              element: <Profile />,
+            },
+            {
+              path: "admin",
+              element: <Admin />,
+            },
+          ],
         },
       ],
     },
