@@ -5,12 +5,13 @@ import "../utils/styles/IndexStyles.css";
 import ButtonComponent from "../components/ButtonComponent.jsx";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-import { colors } from "@mui/material";
+
+import { Link } from "react-router-dom";
 
 function Index() {
   return (
-    <div>
-      <Container className='indexContainer' maxWidth='lg'>
+    <div className='indexContainer'>
+      <Container maxWidth='lg'>
         <h1>Cooktionary</h1>
         <div className='parContainer'>
           <p>
@@ -22,9 +23,13 @@ function Index() {
         </div>
         <div className='btnContainer'>
           <Stack direction='row' spacing={3}>
-            <ButtonComponent label={"Register"} />
-            <ButtonComponent label={"Login"} />
-            <ButtonComponent label={"Test User"} />
+            <Link to={"/register"}>
+              <ButtonComponent label={"Register"} size={"large"} />
+            </Link>
+            <Link to={"/login"}>
+              <ButtonComponent label={"Login"} size={"large"} />
+            </Link>
+            <ButtonComponent label={"Test User"} size={"large"} />
           </Stack>
         </div>
       </Container>

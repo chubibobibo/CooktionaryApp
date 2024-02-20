@@ -20,6 +20,9 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+//action and loader function imports
+import { action as registerAction } from "./pages/Register.jsx";
+
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
   const router = createBrowserRouter([
@@ -39,6 +42,7 @@ function App() {
         {
           path: "register",
           element: <Register />,
+          action: registerAction,
         },
         {
           path: "dashboard",
