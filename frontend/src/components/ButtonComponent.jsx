@@ -11,10 +11,10 @@ const theme = createTheme({
   },
 });
 
-function ButtonComponent({ label }) {
+function ButtonComponent({ label, size, type }) {
   return (
     <ThemeProvider theme={theme}>
-      <Button variant='contained' size='large'>
+      <Button variant='contained' size={size} type={type}>
         {label}
       </Button>
     </ThemeProvider>
