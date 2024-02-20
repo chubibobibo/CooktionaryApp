@@ -14,6 +14,12 @@ import Profile from "./pages/Profile.jsx";
 import Index from "./pages/Index.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 
+//import MUI fonts
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
   const router = createBrowserRouter([

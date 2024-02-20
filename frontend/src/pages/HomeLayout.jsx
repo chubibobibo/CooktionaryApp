@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom"; //allows rendering of children compon
 function HomeLayout() {
   return (
     <div>
-      HomeLayout
       <Outlet />
     </div>
   );
