@@ -48,7 +48,9 @@ export const editRecipe = async (req, res) => {
     throw new ExpressError("No data found", 404);
   }
   const { id } = req.params;
-  const editedRecipe = await RecipeModel.findByIdAndUpdate(id, req.body);
+  const editedRecipe = await RecipeModel.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
   if (!editedRecipe) {
     throw new ExpressError("Cannot update recipe", 404);
   }

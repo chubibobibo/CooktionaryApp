@@ -1,6 +1,10 @@
 import express from "express";
 //import controllers
-import { userRegister, userLogin } from "../controllers/userControllers.js";
+import {
+  userRegister,
+  userLogin,
+  userLogout,
+} from "../controllers/userControllers.js";
 const router = express.Router();
 
 //input validation
@@ -11,5 +15,6 @@ import {
 
 router.post("/register", validateRegister, userRegister);
 router.post("/login", validateLogin, userLogin);
+router.get("/logout", userLogout);
 
 export default router;

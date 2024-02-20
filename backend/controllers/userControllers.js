@@ -14,9 +14,9 @@ export const userRegister = async (req, res) => {
     throw new ExpressError("No data found", 404);
   }
   //check if first entry = admin
-  const isAdmin = await UserModel.countDocuments(0);
+  const isAdmin = (await UserModel.countDocuments()) === 0; // returns a boolean
   //create a new property for role
-  req.body.role = isAdmin === 0 ? "admin" : "user";
+  req.body.role = isAdmin ? "admin" : "user";
   //hashing a password
   const salt = bcrypt.genSaltSync(12);
   const hashedPassword = bcrypt.hashSync(req.body.password, salt); //accepts the password from the form(req.body) and the salt round created.
