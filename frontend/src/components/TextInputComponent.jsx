@@ -3,17 +3,18 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 //CSS styles
-import "../utils/styles/RegisterStyles.css";
+import styles from "../utils/styles/RegisterStyles.module.css";
 
-function TextInputComponent({ label, name }) {
+function TextInputComponent({ label, name, type }) {
   return (
-    <div className='textContainer'>
+    <div className={styles.textContainer}>
       <TextField
         id={name}
         label={label}
         variant='outlined'
         size='small'
         name={name}
+        type={type}
       />
     </div>
   );

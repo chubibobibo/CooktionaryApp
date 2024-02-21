@@ -1,9 +1,13 @@
-.registerContainer {
-  margin-top: 15rem;
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  border: 1px gray solid;
+  height: 25rem;
+  width: 25rem;
 }
-
 h1 {
-  /* margin-left: -2rem; */
+  display: flex;
+  justify-content: center;
 }
 
 .textInputContainer {
@@ -11,18 +15,14 @@ h1 {
   justify-content: center;
   flex-direction: column;
   gap: 15px;
-  margin-bottom: 1rem;
-}
-
-.textContainer {
-  display: flex;
-  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .buttonContainer {
-  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .loginLink {

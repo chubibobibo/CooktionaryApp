@@ -1,0 +1,34 @@
+.registerContainer {
+  border: 1px solid gray;
+  height: 30rem;
+  width: 25rem;
+  display: flex;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.textInputContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonContainer {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.loginLink {
+  display: flex;
+  justify-content: center;
+}

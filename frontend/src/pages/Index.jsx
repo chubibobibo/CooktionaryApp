@@ -1,5 +1,5 @@
 //import CSS styles
-import "../utils/styles/IndexStyles.css";
+import styles from "../utils/styles/IndexStyles.module.css";
 
 //import material UI components
 import ButtonComponent from "../components/ButtonComponent.jsx";
@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 
 function Index() {
   return (
-    <div className='indexContainer'>
+    <div className={styles.indexContainer}>
       <Container maxWidth='lg'>
         <h1>Cooktionary</h1>
-        <div className='parContainer'>
+        <div className={styles.parContainer}>
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, ipsa
             expedita necessitatibus recusandae amet adipisci laboriosam saepe
@@ -21,7 +21,7 @@ function Index() {
             delectus dolore a facere praesentium?
           </p>
         </div>
-        <div className='btnContainer'>
+        <div className={styles.btnContainer}>
           <Stack direction='row' spacing={3}>
             <Link to={"/register"}>
               <ButtonComponent label={"Register"} size={"large"} />

@@ -22,6 +22,7 @@ import "@fontsource/roboto/700.css";
 
 //action and loader function imports
 import { action as registerAction } from "./pages/Register.jsx";
+import { action as loginAction } from "./pages/Login.jsx";
 
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
@@ -38,6 +39,7 @@ function App() {
         {
           path: "login", //no need for "/" because path is relative to parent (HomeLayout)
           element: <Login />,
+          action: loginAction,
         },
         {
           path: "register",
