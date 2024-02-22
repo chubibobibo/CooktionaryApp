@@ -62,7 +62,7 @@ export const userLogin = async (req, res) => {
 //logging out
 export const userLogout = async (req, res) => {
   //create a new cookie that expires immediately
-  res.cookie("recipeCookies", logout, {
+  res.cookie("recipeCookies", "logout", {
     httpOnly: true,
     expires: new Date(Date.now()),
   });

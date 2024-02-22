@@ -24,6 +24,8 @@ import "@fontsource/roboto/700.css";
 //action and loader function imports
 import { action as registerAction } from "./pages/Register.jsx";
 import { action as loginAction } from "./pages/Login.jsx";
+import { action as updateUserAction } from "./pages/Profile.jsx";
+import { loader as loggedUserLoader } from "./pages/DashboardLayout.jsx";
 
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
@@ -50,6 +52,7 @@ function App() {
         {
           path: "dashboard",
           element: <DashboardLayout />,
+          loader: loggedUserLoader,
           errorElement: <ErrorPage />,
           children: [
             {
@@ -71,6 +74,7 @@ function App() {
             {
               path: "profile",
               element: <Profile />,
+              action: updateUserAction,
             },
             {
               path: "admin",
