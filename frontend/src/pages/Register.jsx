@@ -19,15 +19,13 @@ export const action = async ({ request }) => {
   try {
     await axios.post("/api/users/register", data);
     toast.success("User successfuly Registered");
-    return redirect("/");
+    return redirect("/Dashboard");
   } catch (err) {
     console.log(err);
     toast.error(
-      Array.isArray(
-        err.response.data.message
-          ? err.response.data.message[0]
-          : err.response.data.message
-      )
+      Array.isArray(err.response.data.message)
+        ? err.response.data.message[0]
+        : err.response.data.message
     );
     return err;
   }
