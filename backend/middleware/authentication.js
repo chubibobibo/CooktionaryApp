@@ -14,10 +14,10 @@ export const authenticationMiddleware = (req, res, next) => {
     //pass the cookie created to verify and save it to a variable
     req.user = jwt.verify(recipeCookies, process.env.SECRET);
     console.log(req.user);
-    next();
   } catch (err) {
     throw new ExpressError(err, 400);
   }
+  next();
 };
 
 //isAdmin middleware
@@ -25,7 +25,7 @@ export const isAdmin = (...roles) => {
   //rest (...roles) will return all values of roles in an array
   return (req, res, next) => {
     //check whether the role of the logged in user (req.user.role) is included in the roles that was passed as an argument in the isAdmin function
-    const adminUser = roles.includes(req.user.role);
+    const adminUser = roles.includes(req.user.role); //returns a boolean
     if (!adminUser) {
       throw new ExpressError("User is not an admin");
     }

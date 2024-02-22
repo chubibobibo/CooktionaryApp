@@ -24,10 +24,18 @@ import ArticleIcon from "@mui/icons-material/Article";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Button from "@mui/material/Button";
 
-import { Link, useNavigate, redirect } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  redirect,
+  useLoaderData,
+  Outlet,
+} from "react-router-dom";
+
 import axios from "axios";
 import { toast } from "react-toastify";
+import { createContext } from "react";
+
 //CSS styles
 import styles from "../utils/styles/DashboardStyles.module.css";
 
@@ -39,6 +47,21 @@ import {
   AppBar,
   Drawer,
 } from "../utils/MUIcomponents/NavbarComponents";
+
+//loader function to obtain current logged user
+export const loader = async () => {
+  try {
+    const loggedUser = await axios.get("/api/admin/loggedUser");
+    // console.log(loggedUser);
+    return loggedUser;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+//create new context to pass values to children compoenents
+export const DashboardContext = createContext();
 
 function NavbarComponent() {
   const theme = useTheme();
@@ -85,6 +108,9 @@ function NavbarComponent() {
       icon: <AccountBoxIcon />,
     },
   ];
+
+  // useLoaderData;
+  const loggedUser = useLoaderData();
 
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
@@ -160,7 +186,9 @@ function NavbarComponent() {
       </Drawer>
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Outlet />
+        <DashboardContext.Provider value={loggedUser}>
+          <Outlet />
+        </DashboardContext.Provider>
       </Box>
     </Box>
   );
