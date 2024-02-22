@@ -1,9 +1,10 @@
 .loginContainer {
   display: flex;
   justify-content: center;
-  border: 1px gray solid;
+  border: 1px lightgray solid;
+  width: 15rem;
   height: 25rem;
-  width: 25rem;
+  margin-top: 5rem;
 }
 h1 {
   display: flex;

@@ -13,6 +13,7 @@ import Admin from "./pages/Admin.jsx";
 import Profile from "./pages/Profile.jsx";
 import Index from "./pages/Index.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import AllRecipe from "./pages/AllRecipe.jsx";
 
 //import MUI fonts
 import "@fontsource/roboto/300.css";
@@ -49,10 +50,19 @@ function App() {
         {
           path: "dashboard",
           element: <DashboardLayout />,
+          errorElement: <ErrorPage />,
           children: [
+            {
+              index: true,
+              element: <AllRecipe />,
+            },
             {
               path: "add-recipe",
               element: <AddRecipe />,
+            },
+            {
+              path: "all-recipe",
+              element: <AllRecipe />,
             },
             {
               path: "edit-recipe",
