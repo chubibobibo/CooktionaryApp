@@ -1,12 +1,13 @@
 //MUI imports
 import * as React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled, useTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -64,6 +65,14 @@ export const loader = async () => {
 export const DashboardContext = createContext();
 
 function NavbarComponent() {
+  //customTheme for the navbar
+  const theme1 = createTheme({
+    palette: {
+      primary: {
+        main: "#357a38",
+      },
+    },
+  });
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -115,33 +124,40 @@ function NavbarComponent() {
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
       <CssBaseline />
-      <AppBar position='fixed' open={open}>
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography sx={{ flexGrow: 1 }} variant='h6' noWrap component='div'>
-            Cooktionary
-          </Typography>
-          {/* avatar */}
-          <div className={styles.userAvatar}>
-            <img className={styles.avatarImg} src='/50955.jpg' alt='image' />
-          </div>
-          {/* logout button */}
-          <Button color='inherit' onClick={logOutUser}>
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <ThemeProvider theme={theme1}>
+        <AppBar position='fixed' open={open}>
+          <Toolbar>
+            <IconButton
+              color='inherit'
+              aria-label='open drawer'
+              onClick={handleDrawerOpen}
+              edge='start'
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              sx={{ flexGrow: 1 }}
+              variant='h6'
+              noWrap
+              component='div'
+            >
+              Cooktionary
+            </Typography>
+            {/* avatar */}
+            <div className={styles.userAvatar}>
+              <img className={styles.avatarImg} src='/50955.jpg' alt='image' />
+            </div>
+            {/* logout button */}
+            <Button color='inherit' onClick={logOutUser}>
+              Logout
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </ThemeProvider>
       <Drawer variant='permanent' open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
