@@ -26,6 +26,7 @@ import { action as registerAction } from "./pages/Register.jsx";
 import { action as loginAction } from "./pages/Login.jsx";
 import { action as updateUserAction } from "./pages/Profile.jsx";
 import { loader as loggedUserLoader } from "./pages/DashboardLayout.jsx";
+import { loader as allRecipeLoader } from "./pages/AllRecipe.jsx";
 
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
@@ -66,6 +67,7 @@ function App() {
             {
               path: "all-recipe",
               element: <AllRecipe />,
+              loader: allRecipeLoader,
             },
             {
               path: "edit-recipe",
