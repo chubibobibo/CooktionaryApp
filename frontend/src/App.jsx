@@ -14,6 +14,7 @@ import Profile from "./pages/Profile.jsx";
 import Index from "./pages/Index.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AllRecipe from "./pages/AllRecipe.jsx";
+import DeleteJob from "./pages/DeleteRecipe.jsx";
 
 //import MUI fonts
 import "@fontsource/roboto/300.css";
@@ -25,6 +26,7 @@ import "@fontsource/roboto/700.css";
 import { action as registerAction } from "./pages/Register.jsx";
 import { action as loginAction } from "./pages/Login.jsx";
 import { action as updateUserAction } from "./pages/Profile.jsx";
+import { action as deleteRecipeAction } from "./pages/DeleteRecipe.jsx";
 import { loader as loggedUserLoader } from "./pages/DashboardLayout.jsx";
 import { loader as allRecipeLoader } from "./pages/AllRecipe.jsx";
 
@@ -81,6 +83,11 @@ function App() {
             {
               path: "admin",
               element: <Admin />,
+            },
+            {
+              path: "delete-job/:id",
+              element: <DeleteJob />,
+              action: deleteRecipeAction,
             },
           ],
         },

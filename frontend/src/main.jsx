@@ -7,17 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 //error boundary
-import { ErrorBoundary } from "react-error-boundary";
-function fallBackRender({ error, resetErrorBoundary }) {
-  console.log(error);
-  resetErrorBoundary();
-}
+// import { ErrorBoundary } from "react-error-boundary";
+// function fallBackRender({ error, resetErrorBoundary }) {
+//   console.log(error);
+//   resetErrorBoundary();
+// }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ErrorBoundary fallback={"something went wrong"}>
-      <App />
-    </ErrorBoundary>
+    {/* //   <ErrorBoundary fallback={fallBackRender}> */}
+    <App />
+    {/* </ErrorBoundary> */}
 
     <ToastContainer position='top-center' />
   </React.StrictMode>
