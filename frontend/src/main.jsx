@@ -15,7 +15,7 @@ function fallBackRender({ error, resetErrorBoundary }) {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ErrorBoundary fallback={fallBackRender}>
+    <ErrorBoundary fallback={"something went wrong"}>
       <App />
     </ErrorBoundary>
 
