@@ -5,7 +5,14 @@ import TextField from "@mui/material/TextField";
 //CSS styles
 import styles from "../utils/styles/RegisterStyles.module.css";
 
-function TextInputComponent({ label, name, type, defaultValue }) {
+function TextInputComponent({
+  label,
+  name,
+  type,
+  defaultValue,
+  value,
+  onChange,
+}) {
   return (
     <div className={styles.textContainer}>
       <TextField
@@ -15,7 +22,9 @@ function TextInputComponent({ label, name, type, defaultValue }) {
         size='small'
         name={name}
         type={type}
+        value={value}
         defaultValue={defaultValue}
+        onChange={onChange}
       />
     </div>
   );
