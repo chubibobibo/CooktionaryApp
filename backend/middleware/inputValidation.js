@@ -48,6 +48,9 @@ export const validateCreateRecipe = withValidationErrors([
   body("recipeInstructions")
     .notEmpty()
     .withMessage("recipe instructions cannot be empty"),
+  body("recipeDescription")
+    .notEmpty()
+    .withMessage("Recipe description cannot be empty"),
   body("cookingTime")
     .notEmpty()
     .withMessage("cooking time cannot be empty")

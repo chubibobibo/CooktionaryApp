@@ -26,6 +26,10 @@ const RecipeSchema = new Schema(
       type: String,
       required: true,
     },
+    recipeDescription: {
+      type: String,
+      required: true,
+    },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "UserSchema",
