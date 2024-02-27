@@ -19,7 +19,6 @@ export const loader = async () => {
   } catch (err) {
     console.log(err);
     toast.error(err?.response?.data?.message);
-    return err;
   }
 };
 
@@ -34,7 +33,11 @@ function AllRecipe() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <allRecipeContext.Provider value={{ allRecipe }}>
-            <RecipeContainer />
+            {allRecipe !== 0 ? (
+              <RecipeContainer />
+            ) : (
+              <alert>No recipe found</alert>
+            )}
           </allRecipeContext.Provider>
         </Grid>
       </Box>

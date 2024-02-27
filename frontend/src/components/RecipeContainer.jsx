@@ -3,7 +3,7 @@ import * as React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useContext } from "react";
 import { allRecipeContext } from "../pages/AllRecipe.jsx";
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 //import CSS
 import styles from "../utils/styles/AllPages.module.css";
@@ -21,7 +21,7 @@ import { Item } from "../utils/MUIStyles/MUICard.jsx";
 function RecipeContainer() {
   //instantiate useContext
   const context = useContext(allRecipeContext);
-  const { allRecipe, deleteRecipe } = context;
+  const { allRecipe } = context;
   //   console.log(allRecipe);
 
   return (
@@ -30,7 +30,7 @@ function RecipeContainer() {
         // console.log(newRecipes);
         return (
           <Grid xs={12} md={6} lg={3} key={newRecipes._id}>
-            <Card sx={{ maxWidth: 345 }} elevation={10}>
+            <Card sx={{ maxWidth: 345 }} elevation={20}>
               {/* <CardMedia sx={{ height: 140 }} image='' title='green iguana' /> */}
               <CardContent>
                 <Typography
@@ -49,10 +49,12 @@ function RecipeContainer() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size='small'>Modify</Button>
+                <Link to='/dashboard/edit-recipe'>
+                  <Button size='small'>Modify</Button>
+                </Link>
                 <Form
                   method='post'
-                  action={`/dashboard/delete-job/${newRecipes._id}`}
+                  action={`/dashboard/delete-job/${newRecipes._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
                 >
                   <Button type='submit' size='small'>
                     Delete

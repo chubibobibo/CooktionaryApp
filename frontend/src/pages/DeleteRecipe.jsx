@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { redirect } from "react-router-dom";
 
 //action function to delete
+//accepts params in order to send the id to the deleteRecipe API
 export const action = async ({ params }) => {
   try {
     await axios.delete(`/api/recipes/${params.id}`);
