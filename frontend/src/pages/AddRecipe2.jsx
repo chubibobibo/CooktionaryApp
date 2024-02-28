@@ -4,16 +4,34 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import ButtonComponent from "../components/ButtonComponent.jsx";
 
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
 import { useState } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigation, useNavigate } from "react-router-dom";
 
 //component imports
 import TextInputComponent from "../components/TextInputComponent.jsx";
 import SelectComponent from "../components/SelectComponent.jsx";
 
 function AddRecipe2() {
+  //object for select input
+  const dish = {
+    PORK: "pork",
+    BEEF: "beef",
+    CHICKEN: "chicken",
+    VEGETARIAN: "vegetarian",
+    FISH: "fish",
+  };
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  const navigate = useNavigate();
+
   //state to handle data from forms
   const [recipeData, setRecipeData] = useState({
     recipeName: "",
@@ -39,8 +57,8 @@ function AddRecipe2() {
   //function to handle ingredient name
   const handleIngredientName = (e, idx) => {
     //accepts event and idx to track each unique input
-    const newIngredient = recipeData.recipeIngredients; //obtaining the recipeIngredient element from the recipeData array
-    newIngredient[idx].ingredientName = e.target.value; //obtained the exact recipeIngredient from the recipeData array using idx then giving it a value from the corresponding input
+    const newIngredient = recipeData.recipeIngredients; //obtaining the recipeIngredient element from the recipeData object
+    newIngredient[idx].ingredientName = e.target.value; //obtained the exact recipeIngredient using idx then giving it a value from the corresponding input
     setRecipeData((oldData) => {
       //basically creating a copy returning all the prev values of the recipeData, then obtaining the recipeIngredient element which contains an array. Then modifying the key of ingredientName with the new value of recipeIngredients that we assigned value of e.target.value
       return {
@@ -81,11 +99,17 @@ function AddRecipe2() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newRecipeData = await axios.post(
-        "/api/recipes/createRecipe",
-        recipeData
-      );
+      await axios.post("/api/recipes/createRecipe", recipeData);
       toast.success("New Recipe Created");
+      setRecipeData({
+        recipeName: "",
+        recipeIngredients: [{ ingredientName: "", ingredientQty: "" }],
+        recipeInstructions: "",
+        recipeDescription: "",
+        cookingTime: "",
+        dish: "",
+      });
+      navigate("/dashboard/all-recipe");
       return recipeData;
     } catch (err) {
       console.log(err);
@@ -155,11 +179,25 @@ function AddRecipe2() {
               onChange={handleInputChange}
               value={recipeData.cookingTime}
             />
-            <SelectComponent
-              label={"Dish"}
-              name={"dish"}
-              //   value={recipeData.dish}
-            />
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id='demo-simple-select-label'>{"Dish"}</InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  id='demo-simple-select'
+                  value={recipeData.dish}
+                  label={"Dish"}
+                  name={"dish"}
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={dish.PORK}>Pork</MenuItem>
+                  <MenuItem value={dish.BEEF}>Beef</MenuItem>
+                  <MenuItem value={dish.CHICKEN}>Chicken</MenuItem>
+                  <MenuItem value={dish.VEGETARIAN}>Vegetarian</MenuItem>
+                  <MenuItem value={dish.FISH}>Fish</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
           </Box>
           <ButtonComponent
             name={"submit"}
@@ -167,6 +205,7 @@ function AddRecipe2() {
             type={"submit"}
             label={"submit"}
             onClick={handleSubmit}
+            disabled={isSubmitting}
           />
         </Container>
       </Form>
