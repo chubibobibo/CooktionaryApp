@@ -25,6 +25,7 @@ function TextInputComponent({
         value={value}
         defaultValue={defaultValue}
         onChange={onChange}
+        fullWidth
       />
     </div>
   );

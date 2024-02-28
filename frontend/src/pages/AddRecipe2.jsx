@@ -3,6 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import ButtonComponent from "../components/ButtonComponent.jsx";
+import Grid from "@mui/material/Unstable_Grid2";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,7 +18,12 @@ import { useNavigation, useNavigate } from "react-router-dom";
 
 //component imports
 import TextInputComponent from "../components/TextInputComponent.jsx";
+import TextfieldComponent from "../components/TextfieldComponent.jsx";
 import SelectComponent from "../components/SelectComponent.jsx";
+
+//CSS imports
+import styles from "../utils/styles/AddRecipe.module.css";
+import { Item } from "../utils/MUIcomponents/NavbarComponents.js";
 
 function AddRecipe2() {
   //object for select input
@@ -121,92 +127,111 @@ function AddRecipe2() {
     <>
       <CssBaseline />
       <Form method='post'>
-        <Container maxWidth='xl'>
+        <Container maxWidth='xl' className={styles.allRecipeContainer}>
+          <h1>Add Recipes</h1>
           <Box>
-            <TextInputComponent
-              label={"Recipe Name"}
-              name={"recipeName"}
-              type={"text"}
-              onChange={handleInputChange}
-              value={recipeData.recipeName}
-            />
-            {recipeData.recipeIngredients.map((newRecipeData, idx) => {
-              return (
-                <div key={idx}>
+            <Grid container spacing={3}>
+              <Grid sm={12} md={6} lg={6}>
+                <Item className={styles.firstInput}>
                   <TextInputComponent
-                    label={"Ingredient Name"}
-                    name={"ingredientName"}
+                    label={"Recipe Name"}
+                    name={"recipeName"}
                     type={"text"}
-                    onChange={(e) => handleIngredientName(e, idx)}
-                    value={newRecipeData.ingredientName}
+                    onChange={handleInputChange}
+                    value={recipeData.recipeName}
+                  />
+                  <TextfieldComponent
+                    label={"Recipe Instructions"}
+                    name={"recipeInstructions"}
+                    type={"text"}
+                    handleInputChange={handleInputChange}
+                    value={recipeData.recipeInstructions}
+                    name={"recipeInstructions"}
+                  />
+                  <TextfieldComponent
+                    label={"Recipe Description"}
+                    name={"recipeDescription"}
+                    type={"text"}
+                    handleInputChange={handleInputChange}
+                    value={recipeData.description}
+                    name={"recipeDescription"}
                   />
                   <TextInputComponent
-                    label={"Ingredient Quantity"}
-                    name={"ingredientQty"}
-                    type={"text"}
-                    onChange={(e) => handleQty(e, idx)}
-                    value={newRecipeData.ingredientQty}
+                    label={"cooking Time"}
+                    name={"cookingTime"}
+                    type={"number"}
+                    onChange={handleInputChange}
+                    value={recipeData.cookingTime}
                   />
-                </div>
-              );
-            })}
-
-            {/* Note: add onClick property in ButtonComponent */}
-            <ButtonComponent
-              label={"Add Ingredient"}
-              type={"button"}
-              size={"small"}
-              onClick={addInputField}
-            />
-            <TextInputComponent
-              label={"Recipe Instructions"}
-              name={"recipeInstructions"}
-              type={"text"}
-              onChange={handleInputChange}
-              value={recipeData.recipeInstructions}
-            />
-            <TextInputComponent
-              label={"Recipe Description"}
-              name={"recipeDescription"}
-              type={"text"}
-              onChange={handleInputChange}
-              value={recipeData.description}
-            />
-            <TextInputComponent
-              label={"cooking Time"}
-              name={"cookingTime"}
-              type={"number"}
-              onChange={handleInputChange}
-              value={recipeData.cookingTime}
-            />
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id='demo-simple-select-label'>{"Dish"}</InputLabel>
-                <Select
-                  labelId='demo-simple-select-label'
-                  id='demo-simple-select'
-                  value={recipeData.dish}
-                  label={"Dish"}
-                  name={"dish"}
-                  onChange={handleInputChange}
-                >
-                  <MenuItem value={dish.PORK}>Pork</MenuItem>
-                  <MenuItem value={dish.BEEF}>Beef</MenuItem>
-                  <MenuItem value={dish.CHICKEN}>Chicken</MenuItem>
-                  <MenuItem value={dish.VEGETARIAN}>Vegetarian</MenuItem>
-                  <MenuItem value={dish.FISH}>Fish</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+                  <Box sx={{ maxWidth: 150 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id='demo-simple-select-label'>
+                        {"Dish"}
+                      </InputLabel>
+                      <Select
+                        labelId='demo-simple-select-label'
+                        id='demo-simple-select'
+                        value={recipeData.dish}
+                        label={"Dish"}
+                        name={"dish"}
+                        onChange={handleInputChange}
+                      >
+                        <MenuItem value={dish.PORK}>Pork</MenuItem>
+                        <MenuItem value={dish.BEEF}>Beef</MenuItem>
+                        <MenuItem value={dish.CHICKEN}>Chicken</MenuItem>
+                        <MenuItem value={dish.VEGETARIAN}>Vegetarian</MenuItem>
+                        <MenuItem value={dish.FISH}>Fish</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Item>
+              </Grid>
+              <Grid sm={12} md={6} lg={6}>
+                <Box>
+                  {recipeData.recipeIngredients.map((newRecipeData, idx) => {
+                    return (
+                      <div key={idx}>
+                        <Item className={styles.ingredients}>
+                          <h4>{`Ingredient ${idx + 1}`}</h4>
+                          <TextInputComponent
+                            label={"Ingredient Name"}
+                            name={"ingredientName"}
+                            type={"text"}
+                            onChange={(e) => handleIngredientName(e, idx)}
+                            value={newRecipeData.ingredientName}
+                          />
+                          <TextInputComponent
+                            label={"Ingredient Quantity"}
+                            name={"ingredientQty"}
+                            type={"text"}
+                            onChange={(e) => handleQty(e, idx)}
+                            value={newRecipeData.ingredientQty}
+                          />
+                        </Item>
+                      </div>
+                    );
+                  })}
+                  <Box className={styles.ingredientBtn}>
+                    {/* Note: add onClick property in ButtonComponent */}
+                    <ButtonComponent
+                      label={"Add Ingredient"}
+                      type={"button"}
+                      size={"small"}
+                      onClick={addInputField}
+                    />
+                    <ButtonComponent
+                      name={"submit"}
+                      size={"small"}
+                      type={"submit"}
+                      label={"submit"}
+                      onClick={handleSubmit}
+                      disabled={isSubmitting}
+                    />
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
-          <ButtonComponent
-            name={"submit"}
-            size={"small"}
-            type={"submit"}
-            label={"submit"}
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          />
         </Container>
       </Form>
     </>
