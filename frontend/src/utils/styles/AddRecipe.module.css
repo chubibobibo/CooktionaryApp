@@ -1,0 +1,26 @@
+.allRecipeContainer {
+  /* background-color: brown; */
+  display: flex;
+  flex-direction: column;
+}
+
+.firstInput {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-left: 0;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.ingredientBtn {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}

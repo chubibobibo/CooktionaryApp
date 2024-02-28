@@ -8,11 +8,9 @@ import Select from "@mui/material/Select";
 function SelectComponent({
   label,
   name,
-  value,
-  valueLabel,
   handleInputChange,
-  category,
   recipeData,
+  value,
 }) {
   const dishObj = {
     PORK: "pork",
@@ -23,13 +21,13 @@ function SelectComponent({
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ maxWidth: 150 }}>
       <FormControl fullWidth>
-        <InputLabel id='demo-simple-select-label'>{label}</InputLabel>
+        <InputLabel id='demo-simple-select-label'>{"Dish"}</InputLabel>
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
-          value={recipeData}
+          value={value}
           label={label}
           name={name}
           onChange={handleInputChange}

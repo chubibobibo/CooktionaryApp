@@ -121,6 +121,7 @@ function NavbarComponent() {
   // useLoaderData;
   const loggedUser = useLoaderData();
 
+  //JSX rendered using MUI-mini variant drawer
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
       <CssBaseline />
