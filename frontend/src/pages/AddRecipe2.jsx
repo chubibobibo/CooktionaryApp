@@ -119,7 +119,9 @@ function AddRecipe2() {
       return recipeData;
     } catch (err) {
       console.log(err);
-      toast.error(err?.response?.data?.message);
+      Array.isArray(err.response.data.message)
+        ? toast.error(err.response.data.message[0])
+        : toast.error(err.response.data.message);
     }
   };
 
