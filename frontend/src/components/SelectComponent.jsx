@@ -5,14 +5,16 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-function SelectComponent({ label, name, value, valueLabel }) {
-  //state to handle changes in the select input
-  const [category, setCategory] = React.useState("");
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  const dish = {
+function SelectComponent({
+  label,
+  name,
+  value,
+  valueLabel,
+  handleInputChange,
+  category,
+  recipeData,
+}) {
+  const dishObj = {
     PORK: "pork",
     BEEF: "beef",
     CHICKEN: "chicken",
@@ -27,18 +29,17 @@ function SelectComponent({ label, name, value, valueLabel }) {
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
-          value={category}
+          value={recipeData}
           label={label}
           name={name}
-          onChange={handleChange}
+          onChange={handleInputChange}
         >
-          <MenuItem value={dish.PORK}>Pork</MenuItem>
-          <MenuItem value={dish.BEEF}>Beef</MenuItem>
-          <MenuItem value={dish.CHICKEN}>Chicken</MenuItem>
-          <MenuItem value={dish.VEGETARIAN}>Vegetarian</MenuItem>
-          <MenuItem value={dish.FISH}>Fish</MenuItem>
+          <MenuItem value={dishObj.PORK}>Pork</MenuItem>
+          <MenuItem value={dishObj.BEEF}>Beef</MenuItem>
+          <MenuItem value={dishObj.CHICKEN}>Chicken</MenuItem>
+          <MenuItem value={dishObj.VEGETARIAN}>Vegetarian</MenuItem>
+          <MenuItem value={dishObj.FISH}>Fish</MenuItem>
         </Select>
-        <p>{category}</p>
       </FormControl>
     </Box>
   );
