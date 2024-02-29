@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { DashboardContext } from "./DashboardLayout.jsx";
 import { useContext } from "react";
+import Card from "@mui/material/Card";
 
 import { Form, redirect } from "react-router-dom";
 import axios from "axios";
@@ -39,32 +40,38 @@ function Profile() {
   return (
     <Container maxWidth='lg' className='profileContainer'>
       <CssBaseline />
-      <Box sx={{ p: 2, border: "1px solid grey" }}>
-        <h1>Update Profile</h1>
-        <Form className={styles.profileBox} method='post'>
-          <TextInputComponent
-            label={"Name"}
-            name={"name"}
-            type={"text"}
-            defaultValue={loggedUser.data.user.name}
-          />
-          <TextInputComponent
-            label={"Last Name"}
-            name={"lastName"}
-            type={"text"}
-            defaultValue={loggedUser.data.user.lastName}
-          />
-          <TextInputComponent
-            label={"Email"}
-            name={"email"}
-            type={"email"}
-            defaultValue={loggedUser.data.user.email}
-          />
-          <div className={styles.btnContainer}>
-            <ButtonComponent label={"Update"} size={"small"} type={"submit"} />
-          </div>
-        </Form>
-      </Box>
+      <Card elevation={20}>
+        <Box sx={{ m: 2 }}>
+          <h1>Update Profile</h1>
+          <Form className={styles.profileBox} method='post'>
+            <TextInputComponent
+              label={"Name"}
+              name={"name"}
+              type={"text"}
+              defaultValue={loggedUser.data.user.name}
+            />
+            <TextInputComponent
+              label={"Last Name"}
+              name={"lastName"}
+              type={"text"}
+              defaultValue={loggedUser.data.user.lastName}
+            />
+            <TextInputComponent
+              label={"Email"}
+              name={"email"}
+              type={"email"}
+              defaultValue={loggedUser.data.user.email}
+            />
+            <div className={styles.btnContainer}>
+              <ButtonComponent
+                label={"Update"}
+                size={"small"}
+                type={"submit"}
+              />
+            </div>
+          </Form>
+        </Box>
+      </Card>
     </Container>
   );
 }

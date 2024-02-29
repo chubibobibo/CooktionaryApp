@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import ButtonComponent from "../components/ButtonComponent.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
+import Card from "@mui/material/Card";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -131,7 +132,7 @@ function AddRecipe2() {
       <Form method='post'>
         <Container maxWidth='xl' className={styles.allRecipeContainer}>
           <h1>Add Recipes</h1>
-          <Box>
+          <Card elevation={20}>
             <Grid container spacing={3}>
               <Grid sm={12} md={6} lg={6}>
                 <Item className={styles.firstInput}>
@@ -165,7 +166,7 @@ function AddRecipe2() {
                     onChange={handleInputChange}
                     value={recipeData.cookingTime}
                   />
-                  <Box sx={{ maxWidth: 150 }}>
+                  <Box sx={{ maxWidth: 150 }} elevation={15}>
                     <FormControl fullWidth>
                       <InputLabel id='demo-simple-select-label'>
                         {"Dish"}
@@ -189,7 +190,7 @@ function AddRecipe2() {
                 </Item>
               </Grid>
               <Grid sm={12} md={6} lg={6}>
-                <Box>
+                <Box elevation={15}>
                   {recipeData.recipeIngredients.map((newRecipeData, idx) => {
                     return (
                       <div key={idx}>
@@ -233,7 +234,7 @@ function AddRecipe2() {
                 </Box>
               </Grid>
             </Grid>
-          </Box>
+          </Card>
         </Container>
       </Form>
     </>

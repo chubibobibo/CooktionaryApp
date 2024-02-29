@@ -48,6 +48,7 @@ import {
   AppBar,
   Drawer,
 } from "../utils/MUIcomponents/NavbarComponents";
+import Container from "@mui/material/Container";
 
 //loader function to obtain current logged user
 export const loader = async () => {
