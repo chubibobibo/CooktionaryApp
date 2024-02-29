@@ -27,7 +27,7 @@ function RecipeContainer() {
   return (
     <>
       {allRecipe.data.allRecipes.map((newRecipes) => {
-        // console.log(newRecipes);
+        console.log(newRecipes);
         return (
           <Grid xs={12} md={6} lg={3} key={newRecipes._id}>
             <Card sx={{ maxWidth: 345 }} elevation={20}>
@@ -41,14 +41,18 @@ function RecipeContainer() {
                 >
                   {newRecipes.recipeName}
                 </Typography>
-                <Typography variant='body2' color='text.secondary'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
+                <Typography variant='body1' color='text.secondary'>
+                  {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
                   pariatur, fuga labore commodi libero accusantium veritatis
                   ducimus quasi iusto quos! Aliquam nostrum adipisci illo
-                  ducimus animi soluta architecto, quia consequuntur?
+                  ducimus animi soluta architecto, quia consequuntur? */}
+                  {newRecipes.recipeDescription}
                 </Typography>
               </CardContent>
               <CardActions>
+                <Link to={`/dashboard/${newRecipes._id}`}>
+                  <Button size='small'>Details</Button>
+                </Link>
                 <Link to='/dashboard/edit-recipe'>
                   <Button size='small'>Modify</Button>
                 </Link>

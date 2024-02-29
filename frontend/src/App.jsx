@@ -15,6 +15,7 @@ import Index from "./pages/Index.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AllRecipe from "./pages/AllRecipe.jsx";
 import DeleteJob from "./pages/DeleteRecipe.jsx";
+import SingleRecipe from "./pages/SingleRecipe.jsx";
 //tem,porary
 import AddRecipe2 from "./pages/AddRecipe2.jsx";
 
@@ -32,6 +33,7 @@ import { action as deleteRecipeAction } from "./pages/DeleteRecipe.jsx";
 import { action as createRecipeAction } from "./pages/AddRecipe.jsx";
 import { loader as loggedUserLoader } from "./pages/DashboardLayout.jsx";
 import { loader as allRecipeLoader } from "./pages/AllRecipe.jsx";
+import { loader as SingleRecipeLoader } from "./pages/SingleRecipe.jsx";
 
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
@@ -92,6 +94,11 @@ function App() {
               path: "delete-job/:id", //url path
               element: <DeleteJob />,
               action: deleteRecipeAction,
+            },
+            {
+              path: ":id",
+              element: <SingleRecipe />,
+              loader: SingleRecipeLoader,
             },
           ],
         },
