@@ -50,7 +50,7 @@ function SingleRecipe() {
   return (
     <div>
       <Container maxWidth='md' className={styles.recipeContainer}>
-        <Card sx={{ maxWidth: 800 }}>
+        <Card sx={{ maxWidth: 800 }} className={styles.cardContainer}>
           <CardMedia
             component='img'
             alt='green iguana'

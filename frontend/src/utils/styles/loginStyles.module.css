@@ -1,10 +1,12 @@
 .loginContainer {
+  border: 1px solid gray;
+  height: 30rem;
+  width: 25rem;
   display: flex;
   justify-content: center;
-  border: 1px lightgray solid;
-  width: 15rem;
-  height: 25rem;
   margin-top: 5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 h1 {
   display: flex;

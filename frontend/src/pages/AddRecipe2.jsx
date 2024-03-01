@@ -131,7 +131,7 @@ function AddRecipe2() {
         <Container maxWidth='xl' className={styles.allRecipeContainer}>
           <h1>Add Recipes</h1>
           <Card elevation={20}>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} sx={{ m: 1 }}>
               <Grid sm={12} md={6} lg={6}>
                 <Item className={styles.firstInput}>
                   <TextInputComponent
@@ -162,7 +162,7 @@ function AddRecipe2() {
                     onChange={handleInputChange}
                     value={recipeData.cookingTime}
                   />
-                  <Box sx={{ maxWidth: 150 }} elevation={15}>
+                  <Box sx={{ maxWidth: 150 }}>
                     <FormControl fullWidth>
                       <InputLabel id='demo-simple-select-label'>
                         {"Dish"}

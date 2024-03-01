@@ -8,13 +8,28 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+//theme
+import { createTheme } from "@mui/material/styles";
+import { green } from "@mui/material/colors";
+
 import { useContext } from "react";
 import { IngredientContext } from "../pages/SingleRecipe.jsx";
+
+const themeTop = createTheme({
+  palette: {
+    primary: {
+      main: green[400],
+    },
+    secondary: {
+      main: "#f44336",
+    },
+  },
+});
 
 //STYLES
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: themeTop.palette.primary.main,
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -32,19 +47,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-//Temp data
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159),
-  createData("Ice cream sandwich", 237),
-  createData("Eclair", 262),
-  createData("Cupcake", 305),
-  createData("Gingerbread", 356),
-];
-
 function IngredientTable() {
   //obtaining data from context
   const context = useContext(IngredientContext);
@@ -60,6 +62,7 @@ function IngredientTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* mapp the recipeIngredients array */}
           {recipeData.data.singleRecipe.recipeIngredients.map((row) => (
             <StyledTableRow key={row._id}>
               <StyledTableCell component='th' scope='row'>

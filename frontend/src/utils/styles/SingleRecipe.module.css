@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.cardContainer {
+  margin-bottom: 2rem;
+}
+
 .recipeTitle {
   text-transform: capitalize;
   margin-top: 2rem;

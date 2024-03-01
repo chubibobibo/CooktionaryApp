@@ -53,7 +53,7 @@ function Login() {
   const errorMsg1 = useActionData();
 
   return (
-    <Container className={styles.loginContainer} maxWidth='lg'>
+    <Container className={styles.loginContainer}>
       <Form method='post'>
         <h1>Login</h1>
         {/* render a message depending on the object that we created */}
