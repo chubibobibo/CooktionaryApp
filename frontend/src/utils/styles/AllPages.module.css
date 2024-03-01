@@ -58,12 +58,16 @@
   color: #661566;
 }
 
+/* setup for moving the buttons(cardAction) at the bottom of the parent div (cardContainer) */
+
+/* parent div (card)*/
 .cardContainer {
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
+/* child div (button) */
 .cardAction {
   position: absolute;
   bottom: 0;
