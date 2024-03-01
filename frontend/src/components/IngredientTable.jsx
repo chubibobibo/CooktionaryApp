@@ -51,7 +51,7 @@ function IngredientTable() {
   const recipeData = context;
   console.log(recipeData);
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} elevation={10}>
       <Table sx={{ maxWidth: 800 }} aria-label='customized table'>
         <TableHead>
           <TableRow>

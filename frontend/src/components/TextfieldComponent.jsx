@@ -1,5 +1,5 @@
 //MUI imports
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material/";
 import TextField from "@mui/material/TextField";
 
 function TextfieldComponent({ label, value, handleInputChange, name }) {

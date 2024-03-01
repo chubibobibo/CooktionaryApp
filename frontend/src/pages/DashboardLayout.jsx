@@ -3,9 +3,7 @@ import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled, useTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
+import { Box } from "@mui/material/";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -18,20 +16,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import ArticleIcon from "@mui/icons-material/Article";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 
-import {
-  Link,
-  useNavigate,
-  redirect,
-  useLoaderData,
-  Outlet,
-} from "react-router-dom";
+import { useNavigate, useLoaderData, Outlet } from "react-router-dom";
 
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -48,7 +39,6 @@ import {
   AppBar,
   Drawer,
 } from "../utils/MUIcomponents/NavbarComponents";
-import Container from "@mui/material/Container";
 
 //loader function to obtain current logged user
 export const loader = async () => {
@@ -66,7 +56,7 @@ export const loader = async () => {
 export const DashboardContext = createContext();
 
 function NavbarComponent() {
-  //customTheme for the navbar
+  // customTheme for the navbar
   const theme1 = createTheme({
     palette: {
       primary: {
@@ -125,7 +115,6 @@ function NavbarComponent() {
   //JSX rendered using MUI-mini variant drawer
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
-      <CssBaseline />
       <ThemeProvider theme={theme1}>
         <AppBar position='fixed' open={open}>
           <Toolbar>

@@ -1,5 +1,5 @@
 //material UI imports
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material/";
 import TextField from "@mui/material/TextField";
 
 //CSS styles

@@ -2,3 +2,58 @@
   text-transform: capitalize;
   font-weight: 800;
 }
+
+.chicken {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  max-width: fit-content;
+  font-size: small;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #bcbed1;
+  color: #272b69;
+}
+
+.pork {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  max-width: fit-content;
+  font-size: small;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f5718b;
+  color: #692e3a;
+}
+
+.vegetarian {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  max-width: fit-content;
+  font-size: small;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #6efa75;
+  color: #07570b;
+}
+
+.beef {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  max-width: fit-content;
+  font-size: small;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f2e994;
+  color: #595211;
+}
+
+.fish {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  max-width: fit-content;
+  font-size: small;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f7a6f7;
+  color: #661566;
+}

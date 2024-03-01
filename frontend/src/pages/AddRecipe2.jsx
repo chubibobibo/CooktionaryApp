@@ -1,6 +1,6 @@
 //Mui imports
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material/";
 import Container from "@mui/material/Container";
 import ButtonComponent from "../components/ButtonComponent.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -20,7 +20,6 @@ import { useNavigation, useNavigate } from "react-router-dom";
 //component imports
 import TextInputComponent from "../components/TextInputComponent.jsx";
 import TextfieldComponent from "../components/TextfieldComponent.jsx";
-import SelectComponent from "../components/SelectComponent.jsx";
 
 //CSS imports
 import styles from "../utils/styles/AddRecipe.module.css";
@@ -128,7 +127,6 @@ function AddRecipe2() {
 
   return (
     <>
-      <CssBaseline />
       <Form method='post'>
         <Container maxWidth='xl' className={styles.allRecipeContainer}>
           <h1>Add Recipes</h1>
@@ -149,7 +147,6 @@ function AddRecipe2() {
                     type={"text"}
                     handleInputChange={handleInputChange}
                     value={recipeData.recipeInstructions}
-                    name={"recipeInstructions"}
                   />
                   <TextfieldComponent
                     label={"Recipe Description"}
@@ -157,7 +154,6 @@ function AddRecipe2() {
                     type={"text"}
                     handleInputChange={handleInputChange}
                     value={recipeData.description}
-                    name={"recipeDescription"}
                   />
                   <TextInputComponent
                     label={"cooking Time"}
