@@ -44,6 +44,7 @@ function RecipeContainer() {
             <Card
               sx={{ maxWidth: 345, maxHeight: 345, minHeight: 345 }}
               elevation={20}
+              className={styles.cardContainer}
             >
               {/* <CardMedia sx={{ height: 140 }} image='' title='green iguana' /> */}
               <CardContent>
@@ -62,7 +63,7 @@ function RecipeContainer() {
                   {newRecipes.dish}
                 </div>
               </CardContent>
-              <CardActions>
+              <CardActions className={styles.cardAction}>
                 <Link to={`/dashboard/${newRecipes._id}`}>
                   <Button size='small'>Details</Button>
                 </Link>

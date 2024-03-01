@@ -57,3 +57,14 @@
   background-color: #f7a6f7;
   color: #661566;
 }
+
+.cardContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardAction {
+  position: absolute;
+  bottom: 0;
+}
