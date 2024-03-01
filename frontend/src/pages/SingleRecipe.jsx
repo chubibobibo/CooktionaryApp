@@ -1,6 +1,6 @@
 //MUI imports
+import { Box } from "@mui/material/";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -11,11 +11,12 @@ import Typography from "@mui/material/Typography";
 
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useLoaderData, redirect } from "react-router-dom";
+import { useLoaderData, Link, Form } from "react-router-dom";
 import { createContext } from "react";
 
 //component import
 import IngredientTable from "../components/IngredientTable.jsx";
+import RecipeInstructionCard from "../components/RecipeInstructionCard.jsx";
 
 //CSS styles
 import styles from "../utils/styles/SingleRecipe.module.css";
@@ -29,6 +30,7 @@ export const loader = async ({ params }) => {
     console.log(err);
     toast.error(
       Array.isArray(
+        //checks if an array
         err.response.data.message
           ? err.response.data.message[0]
           : err.response.data.message
@@ -47,7 +49,6 @@ function SingleRecipe() {
 
   return (
     <div>
-      <CssBaseline />
       <Container maxWidth='md' className={styles.recipeContainer}>
         <Card sx={{ maxWidth: 800 }}>
           <CardMedia
@@ -56,32 +57,33 @@ function SingleRecipe() {
             height='450'
             image='https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           />
-          <CardContent>
-            <Typography gutterBottom variant='h5' component='div'>
+          <CardContent className={styles.recipeCard}>
+            <Typography
+              gutterBottom
+              variant='h5'
+              component='div'
+              className={styles.recipeTitle}
+            >
               {recipeData.data.singleRecipe.recipeName}
             </Typography>
-            {/* <Typography gutterBottom variant='h6' component='div'>
-              Ingredients:
-            </Typography> */}
-
-            {/* {recipeData.data.singleRecipe.recipeIngredients.map(
-              (newIngredients) => {
-                console.log(newIngredients);
-                return (
-                  <Typography gutterBottom variant='sp' component='div'>
-                    {newIngredients.ingredientName}:
-                    {newIngredients.ingredientQty}
-                  </Typography>
-                );
-              }
-            )} */}
+            {/* //render a table for the ingredients and a card component to render instructions */}
             <IngredientContext.Provider value={recipeData}>
               <IngredientTable />
+              <RecipeInstructionCard />
             </IngredientContext.Provider>
           </CardContent>
           <CardActions>
-            <Button size='small'>Share</Button>
-            <Button size='small'>Learn More</Button>
+            <Link to='/dashboard/edit-recipe'>
+              <Button size='small'>Modify</Button>
+            </Link>
+            <Form
+              method='post'
+              action={`/dashboard/delete-job/${recipeData.data.singleRecipe._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+            >
+              <Button type='submit' size='small'>
+                Delete
+              </Button>
+            </Form>
           </CardActions>
         </Card>
       </Container>

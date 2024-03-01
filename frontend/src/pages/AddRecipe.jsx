@@ -1,11 +1,10 @@
 //Mui imports
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material/";
 import Container from "@mui/material/Container";
 import ButtonComponent from "../components/ButtonComponent.jsx";
 
-import { useState } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -75,7 +74,7 @@ function AddRecipe() {
 
   return (
     <>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Form method='post'>
         <Container maxWidth='xl'>
           <Box>

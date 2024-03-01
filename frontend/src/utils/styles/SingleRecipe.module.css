@@ -2,3 +2,16 @@
   display: flex;
   justify-content: center;
 }
+
+.recipeTitle {
+  text-transform: capitalize;
+  margin-top: 2rem;
+}
+
+.recipeCard {
+  margin-top: 1.5rem;
+}
+
+.instructionCard {
+  margin-top: 1.5rem;
+}

@@ -14,9 +14,11 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
 
 //MUICard component imports
 import { Item } from "../utils/MUIStyles/MUICard.jsx";
+import { Box } from "@mui/material";
 
 function RecipeContainer() {
   //instantiate useContext
@@ -24,13 +26,25 @@ function RecipeContainer() {
   const { allRecipe } = context;
   //   console.log(allRecipe);
 
+  //object for dynamic classes
+  const dynamicClass = {
+    chicken: styles.chicken,
+    beef: styles.beef,
+    fish: styles.fish,
+    vegetarian: styles.vegetarian,
+    pork: styles.pork,
+  };
+
   return (
     <>
       {allRecipe.data.allRecipes.map((newRecipes) => {
         console.log(newRecipes);
         return (
           <Grid xs={12} md={6} lg={3} key={newRecipes._id}>
-            <Card sx={{ maxWidth: 345 }} elevation={20}>
+            <Card
+              sx={{ maxWidth: 345, maxHeight: 345, minHeight: 345 }}
+              elevation={20}
+            >
               {/* <CardMedia sx={{ height: 140 }} image='' title='green iguana' /> */}
               <CardContent>
                 <Typography
@@ -42,19 +56,15 @@ function RecipeContainer() {
                   {newRecipes.recipeName}
                 </Typography>
                 <Typography variant='body1' color='text.secondary'>
-                  {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
-                  pariatur, fuga labore commodi libero accusantium veritatis
-                  ducimus quasi iusto quos! Aliquam nostrum adipisci illo
-                  ducimus animi soluta architecto, quia consequuntur? */}
                   {newRecipes.recipeDescription}
                 </Typography>
+                <div className={dynamicClass[newRecipes.dish]}>
+                  {newRecipes.dish}
+                </div>
               </CardContent>
               <CardActions>
                 <Link to={`/dashboard/${newRecipes._id}`}>
                   <Button size='small'>Details</Button>
-                </Link>
-                <Link to='/dashboard/edit-recipe'>
-                  <Button size='small'>Modify</Button>
                 </Link>
                 <Form
                   method='post'

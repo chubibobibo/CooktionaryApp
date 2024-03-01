@@ -50,7 +50,9 @@ export const validateCreateRecipe = withValidationErrors([
     .withMessage("recipe instructions cannot be empty"),
   body("recipeDescription")
     .notEmpty()
-    .withMessage("Recipe description cannot be empty"),
+    .withMessage("Recipe description cannot be empty")
+    .isLength({ max: 400 })
+    .withMessage("Recipe description cannot exceed 400 characters"),
   body("cookingTime")
     .notEmpty()
     .withMessage("cooking time cannot be empty")

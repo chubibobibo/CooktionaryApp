@@ -1,5 +1,5 @@
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material/";
 import Grid from "@mui/material/Unstable_Grid2";
 
 //component imports
