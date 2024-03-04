@@ -45,7 +45,7 @@ export const IngredientContext = createContext();
 function SingleRecipe() {
   //obtain data from loader
   const recipeData = useLoaderData();
-  console.log(recipeData);
+  // console.log(recipeData);
 
   return (
     <div>

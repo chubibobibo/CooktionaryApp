@@ -52,7 +52,7 @@ function IngredientTable() {
   //obtaining data from context
   const context = useContext(IngredientContext);
   const recipeData = context;
-  console.log(recipeData);
+  // console.log(recipeData);
   return (
     <TableContainer component={Paper} elevation={10}>
       <Table sx={{ maxWidth: 800 }} aria-label='customized table'>
