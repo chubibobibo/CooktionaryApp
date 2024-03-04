@@ -42,16 +42,13 @@ export const loader = async ({ params }) => {
 function EditRecipe() {
   //obtaining loader data
   const singleRecipeLoaderData = useLoaderData();
-  console.log(singleRecipeLoaderData);
-
-  // const { recipeId } = useParams();
-  // console.log(recipeId.id);
+  console.log(singleRecipeLoaderData.data.singleRecipe.recipeIngredients);
 
   //state to manage changes
   const [recipeData, setRecipeData] = useState({
     recipeName: singleRecipeLoaderData.data.singleRecipe.recipeName,
     recipeIngredients: [
-      singleRecipeLoaderData.data.singleRecipe.recipeIngredients,
+      ...singleRecipeLoaderData.data.singleRecipe.recipeIngredients,
     ],
     recipeInstructions:
       singleRecipeLoaderData.data.singleRecipe.recipeInstructions,
@@ -61,7 +58,7 @@ function EditRecipe() {
     dish: singleRecipeLoaderData.data.singleRecipe.dish,
     // singleRecipeLoaderData,
   });
-  console.log(recipeData);
+  // console.log(recipeData);
 
   //object for the select input
   const dish = {
