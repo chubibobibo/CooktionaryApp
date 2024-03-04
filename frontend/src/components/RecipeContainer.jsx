@@ -40,7 +40,7 @@ function RecipeContainer() {
       {allRecipe.data.allRecipes.map((newRecipes) => {
         console.log(newRecipes);
         return (
-          <Grid xs={12} md={6} lg={3} key={newRecipes._id}>
+          <Grid xs={12} md={6} xl={3} key={newRecipes._id}>
             <Card
               sx={{ maxWidth: 345, maxHeight: 345, minHeight: 345 }}
               elevation={20}
