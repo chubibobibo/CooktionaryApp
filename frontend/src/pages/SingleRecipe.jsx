@@ -73,7 +73,9 @@ function SingleRecipe() {
             </IngredientContext.Provider>
           </CardContent>
           <CardActions>
-            <Link to='/dashboard/edit-recipe'>
+            <Link
+              to={`/dashboard/edit-recipe/${recipeData.data.singleRecipe._id}`}
+            >
               <Button size='small'>Modify</Button>
             </Link>
             <Form

@@ -34,6 +34,7 @@ import { action as createRecipeAction } from "./pages/AddRecipe.jsx";
 import { loader as loggedUserLoader } from "./pages/DashboardLayout.jsx";
 import { loader as allRecipeLoader } from "./pages/AllRecipe.jsx";
 import { loader as SingleRecipeLoader } from "./pages/SingleRecipe.jsx";
+import { loader as editRecipe } from "./pages/EditRecipe.jsx";
 
 function App() {
   //instantiate react router using createBrowserRouter (accepts an array of objects)
@@ -78,8 +79,9 @@ function App() {
               loader: allRecipeLoader,
             },
             {
-              path: "edit-recipe",
+              path: "edit-recipe/:id",
               element: <EditRecipe />,
+              loader: editRecipe,
             },
             {
               path: "profile",

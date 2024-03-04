@@ -15,6 +15,7 @@ import { green } from "@mui/material/colors";
 import { useContext } from "react";
 import { IngredientContext } from "../pages/SingleRecipe.jsx";
 
+//created theme to use in the table header
 const themeTop = createTheme({
   palette: {
     primary: {
