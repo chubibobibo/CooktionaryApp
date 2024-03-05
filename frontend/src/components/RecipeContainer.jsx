@@ -42,7 +42,12 @@ function RecipeContainer() {
         return (
           <Grid xs={12} md={6} xl={3} key={newRecipes._id}>
             <Card
-              sx={{ maxWidth: 345, maxHeight: 345, minHeight: 345 }}
+              sx={{
+                minWidth: 200,
+                maxWidth: 345,
+                maxHeight: 470,
+                minHeight: 460,
+              }}
               elevation={20}
               className={styles.cardContainer}
             >
@@ -62,6 +67,9 @@ function RecipeContainer() {
                 <div className={dynamicClass[newRecipes.dish]}>
                   {newRecipes.dish}
                 </div>
+                <Typography>
+                  Cooking Time: {newRecipes.cookingTime} mins.
+                </Typography>
               </CardContent>
               <CardActions className={styles.cardAction}>
                 <Link to={`/dashboard/${newRecipes._id}`}>

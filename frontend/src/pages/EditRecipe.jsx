@@ -1,5 +1,4 @@
 //Mui imports
-
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box } from "@mui/material/";
@@ -12,11 +11,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigation, useNavigate, useParams } from "react-router-dom";
+import { useNavigation, useNavigate } from "react-router-dom";
 
 //component imports
 import TextInputComponent from "../components/TextInputComponent.jsx";
@@ -41,6 +40,8 @@ export const loader = async ({ params }) => {
 
 function EditRecipe() {
   //obtaining loader data
+  //use the data of the specific recipe obtained in the loader function as initial value of the state
+  //NOTE: spread the array of recipeIngredients from loader to obtain all objects.
   const singleRecipeLoaderData = useLoaderData();
   console.log(singleRecipeLoaderData.data.singleRecipe.recipeIngredients);
 
@@ -84,7 +85,7 @@ function EditRecipe() {
     const newIngredientName = recipeData.recipeIngredients;
     newIngredientName[idx].ingredientName = e.target.value;
     setRecipeData((oldData) => {
-      //wae want to change the recipeIngredients(an array) of the oldData with the ingreidentName with the value of newIngredientName.ingredientName
+      //we want to change the recipeIngredients(an array) of the oldData with the ingreidentName with the value of newIngredientName.ingredientName
       return {
         ...oldData,
         [oldData.recipeIngredients]: {
@@ -128,8 +129,8 @@ function EditRecipe() {
         `/api/recipes/${singleRecipeLoaderData.data.singleRecipe._id}`,
         recipeData
       );
-      toast.success("Recipe updated");
       navigate("/dashboard/all-recipe");
+      toast.success("Recipe updated");
     } catch (err) {
       console.log(err);
       toast.error(
@@ -139,17 +140,6 @@ function EditRecipe() {
       );
     }
   };
-
-  //load data
-  // useEffect(() => {
-  //   async function getSingleRecipe() {
-  //     const singleRecipeData = await axios.get(`/api/recipes/${recipeId}`);
-  //     console.log(singleRecipeData);
-  //     setRecipeData(singleRecipeData);
-  //   }
-  //   getSingleRecipe();
-  // }, []);
-
   //submitting state
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
@@ -169,8 +159,6 @@ function EditRecipe() {
                     type={"text"}
                     onChange={handleInputChange}
                     value={recipeData.recipeName}
-                    // defaultValue={recipeLoaderData.data.singleRecipe.recipeName}
-                    // defaultValue={recipeData.recipeName}
                   />
                   <TextfieldComponent
                     label={"Recipe Instructions"}
@@ -178,9 +166,6 @@ function EditRecipe() {
                     type={"text"}
                     handleInputChange={handleInputChange}
                     value={recipeData.recipeInstructions}
-                    // defaultValue={
-                    //   recipeLoaderData.data.singleRecipe.recipeInstructions
-                    // }
                   />
                   <TextfieldComponent
                     label={"Recipe Description"}
@@ -188,9 +173,6 @@ function EditRecipe() {
                     type={"text"}
                     handleInputChange={handleInputChange}
                     value={recipeData.recipeDescription}
-                    // defaultValue={
-                    //   recipeLoaderData.data.singleRecipe.recipeDescription
-                    // }
                   />
                   <TextInputComponent
                     label={"cooking Time"}
@@ -198,9 +180,6 @@ function EditRecipe() {
                     type={"number"}
                     onChange={handleInputChange}
                     value={recipeData.cookingTime}
-                    // defaultValue={
-                    //   recipeLoaderData.data.singleRecipe.cookingTime
-                    // }
                   />
                   <Box sx={{ maxWidth: 150 }}>
                     <FormControl fullWidth>
@@ -227,6 +206,7 @@ function EditRecipe() {
               </Grid>
               <Grid sm={12} md={6} lg={6}>
                 <Box elevation={15}>
+                  {/* ingredients */}
                   {recipeData.recipeIngredients.map((newRecipeData, idx) => {
                     return (
                       <div key={idx}>

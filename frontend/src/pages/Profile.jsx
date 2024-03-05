@@ -17,18 +17,23 @@ import ButtonComponent from "../components/ButtonComponent.jsx";
 //import CSS
 import styles from "../utils/styles/Profile.module.css";
 
-//action function for submitting the form
+//modifications in the action function to include the submission of file (for the user avatar)
+//will not convert formData into an object yet because we might be sending an img file. Multer will convert the file.
 export const action = async ({ request }) => {
-  const formData = await request.formData(); //obtain data from forms
-  const data = Object.fromEntries(formData); //converts the data recieved to usable object
+  const formData = await request.formData();
+  const file = formData.get("avatar"); //avatar is the name of the img file we will send.
+  //file exist and size id > 5mb
+  if (file && file.size > 500000) {
+    toast.error("Image cannot be more than 5mb");
+  }
   try {
-    await axios.patch("/api/admin/updateUser", data);
-    toast.success("User profile updated");
-    return redirect("/dashboard");
+    await axios.patch("/api/admin/updateUser", formData);
+    toast.success("Profile is successfuly updated");
+    return redirect("/dashboard/all-recipe");
   } catch (err) {
     console.log(err);
     toast.error(err?.response?.data?.message);
-    return err;
+    return null;
   }
 };
 
@@ -43,7 +48,11 @@ function Profile() {
       <Card elevation={20}>
         <Box sx={{ m: 2 }}>
           <h1>Update Profile</h1>
-          <Form className={styles.profileBox} method='post'>
+          <Form
+            method='post'
+            className={styles.profileBox}
+            encType='multipart/form-data'
+          >
             <TextInputComponent
               label={"Name"}
               name={"name"}
@@ -61,6 +70,11 @@ function Profile() {
               name={"email"}
               type={"email"}
               defaultValue={loggedUser.data.user.email}
+            />
+            <TextInputComponent
+              type={"file"}
+              label={"Upload avatar"}
+              name={"avatar"}
             />
             <div className={styles.btnContainer}>
               <ButtonComponent

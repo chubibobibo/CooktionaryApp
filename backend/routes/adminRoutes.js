@@ -2,6 +2,8 @@ import express from "express";
 import { Router } from "express";
 const router = express.Router();
 
+//multer import
+import upload from "../middleware/multerMiddleware.js";
 //import controller
 import {
   loggedUser,
@@ -13,6 +15,6 @@ import { isAdmin } from "../middleware/authentication.js";
 
 router.get("/loggedUser", loggedUser);
 router.get("/appStats", isAdmin("admin"), appStats);
-router.patch("/updateUser", updateUser);
+router.patch("/updateUser", upload.single("avatar"), updateUser);
 
 export default router;
