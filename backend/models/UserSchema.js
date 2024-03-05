@@ -26,6 +26,9 @@ const UserSchema = new Schema({
     enum: Object.values(roles),
     required: true,
   },
+  avatar: {
+    type: String,
+  },
 });
 
 export const UserModel = mongoose.model("UserModel", UserSchema);

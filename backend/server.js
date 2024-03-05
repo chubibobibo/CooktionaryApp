@@ -13,6 +13,11 @@ import userRoutes from "./routes/userRoutes.js";
 import recipeRoutes from "./routes/recipeRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 
+//serving public folder
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
+
 //instantiate express
 const app = express();
 
@@ -21,6 +26,10 @@ app.use(express.json());
 //cookie parser
 app.use(cookieParser());
 app.use(cors());
+
+//serving public folder
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, "./public")));
 
 //connection DB
 // getting-started.js

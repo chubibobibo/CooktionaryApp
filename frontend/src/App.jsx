@@ -71,7 +71,7 @@ function App() {
             {
               path: "add-recipe",
               element: <AddRecipe2 />,
-              // action: createRecipeAction,
+              action: createRecipeAction,
             },
             {
               path: "all-recipe",
