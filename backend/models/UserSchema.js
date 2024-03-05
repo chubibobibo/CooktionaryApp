@@ -26,7 +26,10 @@ const UserSchema = new Schema({
     enum: Object.values(roles),
     required: true,
   },
-  avatar: {
+  avatarUrl: {
+    type: String,
+  },
+  avatarPublicId: {
     type: String,
   },
 });

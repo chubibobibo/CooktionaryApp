@@ -19,7 +19,7 @@ export const action = async ({ request }) => {
   try {
     await axios.post("/api/users/register", data);
     toast.success("User successfuly Registered");
-    return redirect("/Dashboard");
+    return redirect("/login");
   } catch (err) {
     console.log(err);
     toast.error(
