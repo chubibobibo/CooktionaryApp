@@ -14,14 +14,15 @@ import { createContext } from "react";
 export const loader = async () => {
   try {
     const allRecipe = await axios.get("/api/recipes/");
-    if (allRecipe.length === 0) {
-      toast.error("No recipes yet");
-    }
-    // console.log(allRecipe);
+    // if (!allRecipe) {
+    //   toast.error("No recipes yet");
+    // }
+    console.log(allRecipe);
     return allRecipe;
   } catch (err) {
     console.log(err);
     toast.error(err?.response?.data?.message);
+    return err;
   }
 };
 
@@ -36,7 +37,7 @@ function AllRecipe() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <allRecipeContext.Provider value={{ allRecipe }}>
-            {allRecipe.length !== 0 ? (
+            {allRecipe === null ? (
               <RecipeContainer />
             ) : (
               <alert>No recipe found</alert>
