@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import cloudinary from "cloudinary";
 dotenv.config();
 
 //import authorization middleware
@@ -37,6 +38,13 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
 }
+
+//cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 //routes
 app.use("/api/users/", userRoutes);

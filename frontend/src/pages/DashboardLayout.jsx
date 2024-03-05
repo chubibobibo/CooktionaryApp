@@ -111,6 +111,7 @@ function NavbarComponent() {
 
   // useLoaderData;
   const loggedUser = useLoaderData();
+  console.log(loggedUser);
 
   //JSX rendered using MUI-mini variant drawer
   return (
@@ -140,7 +141,11 @@ function NavbarComponent() {
             </Typography>
             {/* avatar */}
             <div className={styles.userAvatar}>
-              <img className={styles.avatarImg} src='/50955.jpg' alt='image' />
+              <img
+                className={styles.avatarImg}
+                src={loggedUser.data.user.avatarUrl}
+                alt='image'
+              />
             </div>
             {/* logout button */}
             <Button color='inherit' onClick={logOutUser}>

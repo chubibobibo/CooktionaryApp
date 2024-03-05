@@ -4,6 +4,10 @@ import { RecipeModel } from "../models/RecipeSchema.js";
 //error handling
 import { ExpressError } from "../errors/ExpressError.js";
 
+//cloudinary
+import cloudinary from "cloudinary";
+import { promises as fs } from "fs"; //files system(fs) will be used in deleting the image in the public folder.
+
 //logged user
 export const loggedUser = async (req, res) => {
   const user = await UserModel.findById(req.user.userId);
@@ -25,12 +29,25 @@ export const updateUser = async (req, res) => {
   if (!req.body) {
     throw new ExpressError("No data received", 400);
   }
-  //isntead of the id coming from params, we will be getting the id of the logged in user
-  const updatedUser = await UserModel.findByIdAndUpdate(
-    req.user.userId,
-    req.body,
-    { new: true }
-  );
+  //obtaining all the req.body and saving it to a var
+  //then deleting the apssword from the req.body(obj)
+  const obj = { ...req.body };
+  delete obj.password;
+  //checking if req.file exist to use cloudinary upload api, remember that avatar is not required.
+  // console.log(req.file);
+  if (req.file) {
+    const response = await cloudinary.v2.uploader.upload(req.file.path); //uploading the path of the image parsed by multer (in public/uploads)
+    // console.log(response);
+    await fs.unlink(req.file.path); //removing the image file in the public folder.
+    //accessing and adding the avatarUrl and avatarPublicId from the UserSchema using the req.body(obj)
+    obj.avatarUrl = response.secure_url; //secure_url the url sent by cloudinary
+    obj.avatarPublicId = response.public_id;
+    console.log(obj.avatarUrl);
+  }
+  //instead of the id coming from params, we will be getting the id of the logged in user
+  const updatedUser = await UserModel.findByIdAndUpdate(req.user.userId, obj, {
+    new: true,
+  });
   if (!updatedUser) {
     throw new ExpressError("User cannot be updated", 400);
   }

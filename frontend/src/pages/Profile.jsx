@@ -6,7 +6,7 @@ import { DashboardContext } from "./DashboardLayout.jsx";
 import { useContext } from "react";
 import Card from "@mui/material/Card";
 
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useNavigation } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -42,6 +42,9 @@ function Profile() {
   const context = useContext(DashboardContext);
   const loggedUser = context;
   // console.log(loggedUser);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <Container maxWidth='lg' className='profileContainer'>
       <CssBaseline />
@@ -81,6 +84,7 @@ function Profile() {
                 label={"Update"}
                 size={"small"}
                 type={"submit"}
+                disabled={isSubmitting}
               />
             </div>
           </Form>
