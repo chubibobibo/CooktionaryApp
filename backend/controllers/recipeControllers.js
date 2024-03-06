@@ -4,10 +4,21 @@ import "express-async-errors";
 import { ExpressError } from "../errors/ExpressError.js";
 import { RecipeModel } from "../models/RecipeSchema.js";
 
+import cloudinary from "cloudinary";
+import { promises as fs } from "fs";
+
 //creating a recipe
 export const createRecipe = async (req, res) => {
   if (!req.body) {
     throw new ExpressError("No data received", 404);
+  }
+  //cloudinary upload
+  if (req.file) {
+    console.log(req.file);
+    const response = await cloudinary.v2.uploader.upload(req.file.path);
+    await fs.unlink(req.file.path);
+    req.body.avatarUrl = response.secure_url;
+    req.body.avatarPublicId = response.public_id;
   }
   //UPDATE: adding a created by property
   req.body.createdBy = req.user.userId;
@@ -21,6 +32,7 @@ export const createRecipe = async (req, res) => {
 //all recipes
 export const getAllRecipes = async (req, res) => {
   const allRecipes = await RecipeModel.find({ createdBy: req.user.userId }); //find all recipe of logged user, returns an array
+  console.log(allRecipes);
   if (allRecipes.length === 0) {
     throw new ExpressError("No recipes found", 404);
   }

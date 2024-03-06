@@ -111,7 +111,6 @@ function NavbarComponent() {
 
   // useLoaderData;
   const loggedUser = useLoaderData();
-  console.log(loggedUser);
 
   //JSX rendered using MUI-mini variant drawer
   return (
@@ -140,10 +139,15 @@ function NavbarComponent() {
               Cooktionary
             </Typography>
             {/* avatar */}
+            {/* dynamic use of image depending if avatarUrl exists */}
             <div className={styles.userAvatar}>
               <img
                 className={styles.avatarImg}
-                src={loggedUser.data.user.avatarUrl}
+                src={
+                  loggedUser.data.user.avatarUrl
+                    ? loggedUser.data.user.avatarUrl
+                    : "../src/assets/27470334_7309681.jpg"
+                }
                 alt='image'
               />
             </div>

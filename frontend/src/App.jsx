@@ -7,7 +7,6 @@ import HomeLayout from "./pages/HomeLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import DashboardLayout from "./pages/DashboardLayout.jsx";
-import AddRecipe from "./pages/AddRecipe.jsx";
 import EditRecipe from "./pages/EditRecipe.jsx";
 import Admin from "./pages/Admin.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -30,7 +29,7 @@ import { action as registerAction } from "./pages/Register.jsx";
 import { action as loginAction } from "./pages/Login.jsx";
 import { action as updateUserAction } from "./pages/Profile.jsx";
 import { action as deleteRecipeAction } from "./pages/DeleteRecipe.jsx";
-import { action as createRecipeAction } from "./pages/AddRecipe.jsx";
+// import { action as createRecipeAction } from "./pages/AddRecipe2.jsx";
 import { loader as loggedUserLoader } from "./pages/DashboardLayout.jsx";
 import { loader as allRecipeLoader } from "./pages/AllRecipe.jsx";
 import { loader as SingleRecipeLoader } from "./pages/SingleRecipe.jsx";
@@ -71,7 +70,7 @@ function App() {
             {
               path: "add-recipe",
               element: <AddRecipe2 />,
-              action: createRecipeAction,
+              // action: createRecipeAction,
             },
             {
               path: "all-recipe",

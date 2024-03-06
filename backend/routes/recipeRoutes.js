@@ -1,6 +1,8 @@
 import express from "express";
 const router = express.Router();
 
+import upload from "../middleware/multerMiddleware.js";
+
 //import input validator
 import {
   validateCreateRecipe,
