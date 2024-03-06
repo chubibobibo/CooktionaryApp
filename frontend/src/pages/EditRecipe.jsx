@@ -57,9 +57,36 @@ function EditRecipe() {
       singleRecipeLoaderData.data.singleRecipe.recipeDescription,
     cookingTime: singleRecipeLoaderData.data.singleRecipe.cookingTime,
     dish: singleRecipeLoaderData.data.singleRecipe.dish,
+    avatarUrl: singleRecipeLoaderData.data.singleRecipe.avatarUrl,
+    avatarPublicId: singleRecipeLoaderData.data.singleRecipe.avatarPublicId,
     // singleRecipeLoaderData,
   });
-  // console.log(recipeData);
+  //state to handle image
+  const [imgData, setImgData] = useState("");
+
+  //function to transform the object from e.target.files to base64.
+  const transformFile = (file) => {
+    const reader = new FileReader(); //transforms the object into base64(url).
+    if (file) {
+      reader.readAsDataURL(file); //transforming the object
+      reader.onloadend = () => {
+        //event fired when done reading the file
+        const result = reader.result; //converted image file to base64
+        // setFileData(result);
+        setRecipeData((oldData) => {
+          return { ...oldData, avatarUrl: result };
+        });
+      };
+    } else {
+      setImgData("");
+    }
+  };
+
+  //event handler to grab the image from the input form
+  const handlePhoto = (e) => {
+    const imgFile = e.target.files[0]; //image file from form
+    transformFile(imgFile); //converts the img file from form
+  };
 
   //object for the select input
   const dish = {
@@ -159,6 +186,13 @@ function EditRecipe() {
                     type={"text"}
                     onChange={handleInputChange}
                     value={recipeData.recipeName}
+                  />
+                  <TextInputComponent
+                    label={"Upload photo"}
+                    name={"avatar"}
+                    type={"file"}
+                    onChange={handlePhoto}
+                    // value={recipeData.recipeName}
                   />
                   <TextfieldComponent
                     label={"Recipe Instructions"}

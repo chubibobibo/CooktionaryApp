@@ -46,14 +46,14 @@ function RecipeContainer() {
               sx={{
                 minWidth: 200,
                 maxWidth: 345,
-                maxHeight: 470,
-                minHeight: 460,
+                maxHeight: 600,
+                minHeight: 595,
               }}
               elevation={20}
               className={styles.cardContainer}
             >
               <CardMedia
-                sx={{ height: 140 }}
+                sx={{ height: 200 }}
                 image={newRecipes.avatarUrl}
                 title='green iguana'
               />
