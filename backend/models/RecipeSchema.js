@@ -43,6 +43,12 @@ const RecipeSchema = new Schema(
       enum: Object.values(dish),
       required: true,
     },
+    avatarUrl: {
+      type: String,
+    },
+    avatarPublicId: {
+      type: String,
+    },
   },
   { timestamps: true } //creates createdAt property for every entry
 );

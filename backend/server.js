@@ -23,7 +23,7 @@ import path from "path";
 const app = express();
 
 //parse json
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 //cookie parser
 app.use(cookieParser());
 app.use(cors());
