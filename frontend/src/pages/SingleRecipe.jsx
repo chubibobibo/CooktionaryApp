@@ -53,8 +53,8 @@ function SingleRecipe() {
         <Card sx={{ maxWidth: 800 }} className={styles.cardContainer}>
           <CardMedia
             component='img'
-            alt='green iguana'
-            height='450'
+            alt='food img'
+            height='400'
             image={recipeData.data.singleRecipe.avatarUrl}
           />
           <CardContent className={styles.recipeCard}>
