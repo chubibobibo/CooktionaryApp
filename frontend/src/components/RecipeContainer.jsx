@@ -15,6 +15,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
+import CardMedia from "@mui/material/CardMedia";
 
 //MUICard component imports
 import { Item } from "../utils/MUIStyles/MUICard.jsx";
@@ -51,7 +52,11 @@ function RecipeContainer() {
               elevation={20}
               className={styles.cardContainer}
             >
-              {/* <CardMedia sx={{ height: 140 }} image='' title='green iguana' /> */}
+              <CardMedia
+                sx={{ height: 140 }}
+                image={newRecipes.avatarUrl}
+                title='green iguana'
+              />
               <CardContent>
                 <Typography
                   gutterBottom

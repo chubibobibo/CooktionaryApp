@@ -51,7 +51,36 @@ function AddRecipe2() {
     recipeDescription: "",
     cookingTime: "",
     dish: "",
+    avatarUrl: "",
+    avatarPublicId: "",
   });
+
+  //state to handle image file
+  const [imgData, setImgData] = useState("");
+
+  //function to transform the object from e.target.files to base64.
+  const transformFile = (file) => {
+    const reader = new FileReader(); //transforms the object into base64(url).
+    if (file) {
+      reader.readAsDataURL(file); //transforming the object
+      reader.onloadend = () => {
+        //event fired when done reading the file
+        const result = reader.result; //converted image file to base64
+        // setFileData(result);
+        setRecipeData((oldData) => {
+          return { ...oldData, avatarUrl: result };
+        });
+      };
+    } else {
+      setImgData("");
+    }
+  };
+
+  //event hanlder for image upload
+  const handlePhoto = (e) => {
+    const imgFile = e.target.files[0]; //obtains image file from form
+    transformFile(imgFile);
+  };
 
   //function to handle input fields
   const handleInputChange = (e) => {
@@ -127,7 +156,7 @@ function AddRecipe2() {
 
   return (
     <>
-      <Form method='post'>
+      <Form method='post' encType='multipart/form-data'>
         <Container maxWidth='xl' className={styles.allRecipeContainer}>
           <h1>Add Recipes</h1>
           <Card elevation={20}>
@@ -140,6 +169,13 @@ function AddRecipe2() {
                     type={"text"}
                     onChange={handleInputChange}
                     value={recipeData.recipeName}
+                  />
+                  <TextInputComponent
+                    label={"Upload Photo"}
+                    name={"avatar"}
+                    type={"file"}
+                    onChange={handlePhoto}
+                    accept='image/jpg, image/png, image/jpeg'
                   />
                   <TextfieldComponent
                     label={"Recipe Instructions"}

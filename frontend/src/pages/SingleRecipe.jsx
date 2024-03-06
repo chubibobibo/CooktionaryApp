@@ -45,7 +45,7 @@ export const IngredientContext = createContext();
 function SingleRecipe() {
   //obtain data from loader
   const recipeData = useLoaderData();
-  // console.log(recipeData);
+  console.log(recipeData);
 
   return (
     <div>
@@ -55,7 +55,7 @@ function SingleRecipe() {
             component='img'
             alt='green iguana'
             height='450'
-            image='https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            image={recipeData.data.singleRecipe.avatarUrl}
           />
           <CardContent className={styles.recipeCard}>
             <Typography

@@ -9,14 +9,12 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
 import { createContext } from "react";
+import Alert from "@mui/material/Alert";
 
 //loader function to obtain data from API
 export const loader = async () => {
   try {
     const allRecipe = await axios.get("/api/recipes/");
-    // if (!allRecipe) {
-    //   toast.error("No recipes yet");
-    // }
     console.log(allRecipe);
     return allRecipe;
   } catch (err) {
@@ -37,10 +35,10 @@ function AllRecipe() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <allRecipeContext.Provider value={{ allRecipe }}>
-            {allRecipe === null ? (
+            {allRecipe?.data?.allRecipes ? (
               <RecipeContainer />
             ) : (
-              <alert>No recipe found</alert>
+              <Alert>No recipe found</Alert>
             )}
           </allRecipeContext.Provider>
         </Grid>
