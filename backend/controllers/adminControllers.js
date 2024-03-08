@@ -44,6 +44,15 @@ export const updateUser = async (req, res) => {
     obj.avatarPublicId = response.public_id;
     console.log(obj.avatarUrl);
   }
+
+  //find current logged in user so that we can obtain it's avatarPublicId
+  const oldUser = await UserModel.findById(req.user.userId);
+
+  //delete image in cloudinary once same publicId to delete it in cloudinary and replace with new image
+  if (req.file && oldUser.avatarPublicId) {
+    await cloudinary.v2.uploader.destroy(oldUser.avatarPublicId);
+  }
+
   //instead of the id coming from params, we will be getting the id of the logged in user
   const updatedUser = await UserModel.findByIdAndUpdate(req.user.userId, obj, {
     new: true,
@@ -52,4 +61,18 @@ export const updateUser = async (req, res) => {
     throw new ExpressError("User cannot be updated", 400);
   }
   res.status(200).json({ message: "user updated", updatedUser });
+};
+
+export const recipeOwner = async (req, res) => {
+  const { id } = req.params;
+  const foundRecipe = await RecipeModel.findById(id);
+  if (!foundRecipe) {
+    throw new ExpressError("Recipe not found", 404);
+  }
+  const foundOwner = await UserModel.findById(foundRecipe.createdBy);
+  // console.log(foundOwner);
+  if (!foundOwner) {
+    throw new ExpressError("Recipe owner not found", 404);
+  }
+  res.status(200).json({ message: "Recipe Owner", foundOwner });
 };
