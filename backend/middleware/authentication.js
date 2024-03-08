@@ -32,3 +32,11 @@ export const isAdmin = (...roles) => {
     next();
   };
 };
+
+//middlware to check if user is guest user (test user)
+export const isGuestUser = (req, res, next) => {
+  if (req.user.userId === "65e9851ff83744e33f89553e") {
+    throw new ExpressError("User is not authorized", 400);
+  }
+  next();
+};

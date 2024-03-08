@@ -44,8 +44,9 @@ export const userLogin = async (req, res) => {
     throw new ExpressError("Wrong email or password", 400);
   }
   //implement jwt tokens
+  //UPDATE: include user's name in the token. used in displaying recipe owner.
   const token = jwt.sign(
-    { userId: foundUser._id, role: foundUser.role },
+    { userId: foundUser._id, role: foundUser.role, userName: foundUser.name },
     process.env.SECRET,
     { expiresIn: "7d" }
   );

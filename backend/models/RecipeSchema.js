@@ -49,6 +49,9 @@ const RecipeSchema = new Schema(
     avatarPublicId: {
       type: String,
     },
+    author: {
+      type: String,
+    },
   },
   { timestamps: true } //creates createdAt property for every entry
 );
