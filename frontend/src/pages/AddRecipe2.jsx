@@ -171,7 +171,7 @@ function AddRecipe2() {
                     value={recipeData.recipeName}
                   />
                   <TextInputComponent
-                    label={"Upload Photo"}
+                    // label={"Upload Photo"}
                     name={"avatar"}
                     type={"file"}
                     onChange={handlePhoto}

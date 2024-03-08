@@ -15,7 +15,7 @@ import Alert from "@mui/material/Alert";
 export const loader = async () => {
   try {
     const allRecipe = await axios.get("/api/recipes/");
-    console.log(allRecipe);
+    // console.log(allRecipe);
     return allRecipe;
   } catch (err) {
     console.log(err);
