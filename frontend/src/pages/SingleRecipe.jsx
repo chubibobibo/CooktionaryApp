@@ -13,6 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useLoaderData, Link, Form } from "react-router-dom";
 import { createContext } from "react";
+import { useState, useEffect } from "react";
 
 //component import
 import IngredientTable from "../components/IngredientTable.jsx";
@@ -24,7 +25,7 @@ import styles from "../utils/styles/SingleRecipe.module.css";
 //loader function to obtain specific recipe
 export const loader = async ({ params }) => {
   try {
-    const singleRecipe = axios.get(`/api/recipes/${params.id}`);
+    const singleRecipe = await axios.get(`/api/recipes/${params.id}`);
     return singleRecipe;
   } catch (err) {
     console.log(err);
@@ -45,7 +46,20 @@ export const IngredientContext = createContext();
 function SingleRecipe() {
   //obtain data from loader
   const recipeData = useLoaderData();
-  console.log(recipeData);
+  // console.log(loggedUser);
+
+  //state for logged user
+  const [loggedUser, setLoggedUser] = useState();
+  //obtaining logged user to hide modify and delete btns
+  useEffect(() => {
+    async function user() {
+      const foundUser = await axios.get("/api/admin/loggedUser");
+      // console.log(foundUser.data.user);
+      setLoggedUser(foundUser.data.user._id);
+    }
+    user();
+  }, []);
+  // console.log(loggedUser);
 
   return (
     <div>
@@ -72,21 +86,23 @@ function SingleRecipe() {
               <RecipeInstructionCard />
             </IngredientContext.Provider>
           </CardContent>
-          <CardActions>
-            <Link
-              to={`/dashboard/edit-recipe/${recipeData.data.singleRecipe._id}`}
-            >
-              <Button size='small'>Modify</Button>
-            </Link>
-            <Form
-              method='post'
-              action={`/dashboard/delete-job/${recipeData.data.singleRecipe._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
-            >
-              <Button type='submit' size='small'>
-                Delete
-              </Button>
-            </Form>
-          </CardActions>
+          {loggedUser === recipeData.data.singleRecipe.createdBy && (
+            <CardActions>
+              <Link
+                to={`/dashboard/edit-recipe/${recipeData.data.singleRecipe._id}`}
+              >
+                <Button size='small'>Modify</Button>
+              </Link>
+              <Form
+                method='post'
+                action={`/dashboard/delete-job/${recipeData.data.singleRecipe._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+              >
+                <Button type='submit' size='small'>
+                  Delete
+                </Button>
+              </Form>
+            </CardActions>
+          )}
         </Card>
       </Container>
     </div>

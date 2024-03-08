@@ -76,7 +76,7 @@ function Profile() {
             />
             <TextInputComponent
               type={"file"}
-              label={"Upload avatar"}
+              // label={"Upload avatar"}
               name={"avatar"}
             />
             <div className={styles.btnContainer}>

@@ -21,11 +21,14 @@ import CardMedia from "@mui/material/CardMedia";
 import { Item } from "../utils/MUIStyles/MUICard.jsx";
 import { Box } from "@mui/material";
 
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 function RecipeContainer() {
   //instantiate useContext
   const context = useContext(allRecipeContext);
   const { allRecipe } = context;
-  //   console.log(allRecipe);
+  // console.log(allRecipe);
 
   //object for dynamic classes
   const dynamicClass = {
@@ -36,10 +39,22 @@ function RecipeContainer() {
     pork: styles.pork,
   };
 
+  //state for logged user
+  const [loggedUser, setLoggedUser] = useState();
+  //load data from loggedUser API
+  useEffect(() => {
+    const user = async () => {
+      const foundUser = await axios.get("/api/admin/loggedUser");
+      // console.log(foundUser);
+      setLoggedUser(foundUser.data.user._id);
+    };
+    user();
+  }, []);
+
+  console.log(loggedUser);
   return (
     <>
       {allRecipe.data.allRecipes.map((newRecipes) => {
-        console.log(newRecipes);
         return (
           <Grid xs={12} md={6} xl={3} key={newRecipes._id}>
             <Card
@@ -47,7 +62,7 @@ function RecipeContainer() {
                 minWidth: 200,
                 maxWidth: 345,
                 maxHeight: 600,
-                minHeight: 595,
+                minHeight: 630,
               }}
               elevation={20}
               className={styles.cardContainer}
@@ -55,7 +70,7 @@ function RecipeContainer() {
               <CardMedia
                 sx={{ height: 200 }}
                 image={newRecipes.avatarUrl}
-                title='green iguana'
+                title='food image'
               />
               <CardContent>
                 <Typography
@@ -69,25 +84,33 @@ function RecipeContainer() {
                 <Typography variant='body1' color='text.secondary'>
                   {newRecipes.recipeDescription}
                 </Typography>
-                <div className={dynamicClass[newRecipes.dish]}>
+                <Typography
+                  variant='button'
+                  className={dynamicClass[newRecipes.dish]}
+                >
                   {newRecipes.dish}
-                </div>
-                <Typography>
+                </Typography>
+                <Typography variant='body2'>
                   Cooking Time: {newRecipes.cookingTime} mins.
+                </Typography>
+                <Typography variant='body2'>
+                  Created By: {newRecipes.author}
                 </Typography>
               </CardContent>
               <CardActions className={styles.cardAction}>
                 <Link to={`/dashboard/${newRecipes._id}`}>
                   <Button size='small'>Details</Button>
                 </Link>
-                <Form
-                  method='post'
-                  action={`/dashboard/delete-job/${newRecipes._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
-                >
-                  <Button type='submit' size='small'>
-                    Delete
-                  </Button>
-                </Form>
+                {loggedUser === newRecipes.createdBy && (
+                  <Form
+                    method='post'
+                    action={`/dashboard/delete-job/${newRecipes._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+                  >
+                    <Button type='submit' size='small'>
+                      Delete
+                    </Button>
+                  </Form>
+                )}
               </CardActions>
             </Card>
           </Grid>
