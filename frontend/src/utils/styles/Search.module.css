@@ -1,0 +1,5 @@
+.SearchContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+}

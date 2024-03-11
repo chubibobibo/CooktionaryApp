@@ -27,8 +27,8 @@ function SelectComponent({
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
-          value={value}
           label={label}
+          value={value}
           name={name}
           onChange={handleInputChange}
         >

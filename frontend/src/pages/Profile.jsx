@@ -23,7 +23,7 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const file = formData.get("avatar"); //avatar is the name of the img file we will send.
   //file exist and size id > 5mb
-  if (file && file.size > 500000) {
+  if (file && file.size > 5000000) {
     toast.error("Image cannot be more than 5mb");
   }
   try {
