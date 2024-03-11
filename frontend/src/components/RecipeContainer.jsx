@@ -52,6 +52,7 @@ function RecipeContainer() {
   }, []);
 
   console.log(loggedUser);
+  console.log(allRecipe);
   return (
     <>
       {allRecipe.data.allRecipes.map((newRecipes) => {
@@ -62,7 +63,7 @@ function RecipeContainer() {
                 minWidth: 200,
                 maxWidth: 345,
                 maxHeight: 600,
-                minHeight: 630,
+                minHeight: 650,
               }}
               elevation={20}
               className={styles.cardContainer}
@@ -86,7 +87,7 @@ function RecipeContainer() {
                 </Typography>
                 <Typography
                   variant='button'
-                  className={dynamicClass[newRecipes.dish]}
+                  className={dynamicClass[newRecipes.dish]} //using the object dynamicClass the accessing the value using the newRecipes.dish as key
                 >
                   {newRecipes.dish}
                 </Typography>

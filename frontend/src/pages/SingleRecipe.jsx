@@ -59,6 +59,8 @@ function SingleRecipe() {
     }
     user();
   }, []);
+  console.log(loggedUser);
+  console.log(recipeData);
   // console.log(loggedUser);
 
   return (
