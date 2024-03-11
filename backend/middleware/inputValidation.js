@@ -34,13 +34,13 @@ export const validateCreateRecipe = withValidationErrors([
   body("recipeName")
     .notEmpty()
     .withMessage("Recipe cannot be empty")
-    .isLength({ max: 20 })
+    .isLength({ max: 30 })
     .withMessage("recipe name cannot exceed 20 characters"),
   //syntax for checking an array using express validator
   body("recipeIngredients.*.ingredientName")
     .notEmpty()
     .withMessage("Ingreident name cannot be empty")
-    .isLength({ max: 15 })
+    .isLength({ max: 30 })
     .withMessage("Ingredient name cannot exceed 15 characters"),
   body("recipeIngredients.*.ingredientQty")
     .notEmpty()

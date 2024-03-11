@@ -36,8 +36,31 @@ export const createRecipe = async (req, res) => {
 
 //all recipes
 //Update: changed finding all recipe instead of the ones created by the logged user.
+//update: implementing query
 export const getAllRecipes = async (req, res) => {
-  const allRecipes = await RecipeModel.find({}); //find all recipe, returns an array
+  //implementing query
+  const { search, dish } = req.query;
+  console.log(req.query);
+  //object to use in the find query. empty string to retrun all recipes if no queries are found.
+  const queryObj = {};
+
+  //checking for req.query(search), This will compare the req.query(search) to the properties we have in the DB (recipeName and createdBy). 'i' ignores letter cases.
+  //$or is to create objects depending on the search queries
+  if (search) {
+    queryObj.$or = [
+      {
+        recipeName: { $regex: search, $options: "i" },
+      },
+    ];
+  }
+
+  //managing queries for select inputs (dish)
+  //dish is the name of the select input
+  if (dish && dish !== "all") {
+    queryObj.dish = dish;
+  }
+
+  const allRecipes = await RecipeModel.find(queryObj); //find all recipe, returns an array
   // console.log(allRecipes);
   if (allRecipes.length === 0) {
     throw new ExpressError("No recipes found", 404);
@@ -53,8 +76,11 @@ export const getSingleRecipe = async (req, res) => {
   if (!singleRecipe) {
     throw new ExpressError("Recipe not found", 404);
   }
-  //limiting access of a single recipe depending if user is admin or the author.
-  // if (req.user.role !== "admin" && singleRecipe.createdBy !== req.user.userId) {
+  // limiting access of a single recipe depending if user is admin or the author.
+  // if (
+  //   req.user.role !== "admin" &&
+  //   singleRecipe.createdBy.toString() !== req.user.userId
+  // ) {
   //   throw new ExpressError("user not authorized");
   // }
 
@@ -81,7 +107,10 @@ export const editRecipe = async (req, res) => {
   }
 
   //limiting the access to editing recipe
-  if (req.user.role !== "admin" && oldRecipe.createdBy !== req.user.userId) {
+  if (
+    req.user.role !== "admin" &&
+    oldRecipe.createdBy.toString() !== req.user.userId
+  ) {
     throw new ExpressError("User not authorized", 400);
   }
   const editedRecipe = await RecipeModel.findByIdAndUpdate(id, req.body, {
@@ -98,7 +127,11 @@ export const deleteRecipe = async (req, res) => {
   const { id } = req.params;
   //limit deleting of recipe to authors only
   const foundRecipe = await RecipeModel.findById(id);
-  if (req.user.role !== "admin" && foundRecipe.createdBy !== req.user.userId) {
+  console.log(`foundRecipe ${foundRecipe}`);
+  if (
+    req.user.role !== "admin" &&
+    foundRecipe.createdBy.toString() !== req.user.userId
+  ) {
     throw new ExpressError("User not authorized", 400);
   }
   const deletedRecipe = await RecipeModel.findByIdAndDelete(id);

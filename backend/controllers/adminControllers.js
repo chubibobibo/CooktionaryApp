@@ -42,7 +42,7 @@ export const updateUser = async (req, res) => {
     //accessing and adding the avatarUrl and avatarPublicId from the UserSchema using the req.body(obj)
     obj.avatarUrl = response.secure_url; //secure_url the url sent by cloudinary
     obj.avatarPublicId = response.public_id;
-    console.log(obj.avatarUrl);
+    // console.log(obj.avatarUrl);
   }
 
   //find current logged in user so that we can obtain it's avatarPublicId
