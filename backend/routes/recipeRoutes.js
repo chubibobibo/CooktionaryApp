@@ -25,7 +25,7 @@ import {
 router.get("/", getAllRecipes);
 router.post(
   "/createRecipe",
-  isGuestUser,
+  // isGuestUser,
   upload.single("avatar"),
   validateCreateRecipe,
   createRecipe

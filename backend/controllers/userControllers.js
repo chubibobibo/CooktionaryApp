@@ -22,7 +22,7 @@ export const userRegister = async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, salt); //accepts the password from the form(req.body) and the salt round created.
   req.body.password = hashedPassword;
   const newUser = await UserModel.create(req.body);
-  console.log(newUser);
+  // console.log(newUser);
   if (!newUser) {
     throw new ExpressError("Cannot create user");
   }

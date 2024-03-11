@@ -13,6 +13,8 @@ export const authenticationMiddleware = (req, res, next) => {
   try {
     //pass the cookie created to verify and save it to a variable
     req.user = jwt.verify(recipeCookies, process.env.SECRET);
+    // const guestUser = req.user.userId === "65e9851ff83744e33f89553e"; //returns a boolean if logged user is guestUser
+    // req.user.guestUser === guestUser;
     console.log(req.user);
   } catch (err) {
     throw new ExpressError(err, 400);
@@ -35,8 +37,14 @@ export const isAdmin = (...roles) => {
 
 //middlware to check if user is guest user (test user)
 export const isGuestUser = (req, res, next) => {
-  if (req.user.userId === "65e9851ff83744e33f89553e") {
+  if (req.user.userId == "65e9851ff83744e33f89553e") {
+    //id of test user in the database.
     throw new ExpressError("User is not authorized", 400);
   }
   next();
 };
+
+// export const recipeAuthor = (req,res,next)=> {
+//   if(req.user.userId !== )
+//   next()
+// }
