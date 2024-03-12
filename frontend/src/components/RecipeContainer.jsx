@@ -40,19 +40,20 @@ function RecipeContainer() {
   };
 
   //state for logged user
-  const [loggedUser, setLoggedUser] = useState();
+  const [loggedUser, setLoggedUser] = useState({});
   //load data from loggedUser API
   useEffect(() => {
     const user = async () => {
       const foundUser = await axios.get("/api/admin/loggedUser");
+      //foundUser.data.user...
+      setLoggedUser(foundUser.data.user);
       // console.log(foundUser);
-      setLoggedUser(foundUser.data.user._id);
     };
     user();
   }, []);
 
   console.log(loggedUser);
-  console.log(allRecipe);
+  // console.log(loggedUser.foundUser.data.user);
   return (
     <>
       {allRecipe.data.allRecipes.map((newRecipes) => {
@@ -99,18 +100,29 @@ function RecipeContainer() {
                 </Typography>
               </CardContent>
               <CardActions className={styles.cardAction}>
-                <Link to={`/dashboard/${newRecipes._id}`}>
-                  <Button size='small'>Details</Button>
-                </Link>
-                {loggedUser === newRecipes.createdBy && (
-                  <Form
-                    method='post'
-                    action={`/dashboard/delete-job/${newRecipes._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
-                  >
-                    <Button type='submit' size='small'>
-                      Delete
-                    </Button>
-                  </Form>
+                {/* buttons */}
+                {loggedUser.role === "admin" ||
+                loggedUser._id === newRecipes.createdBy ? (
+                  <>
+                    <Form
+                      method='post'
+                      action={`/dashboard/delete-job/${newRecipes._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+                    >
+                      <Link to={`/dashboard/${newRecipes._id}`}>
+                        <Button size='small'>Details</Button>
+                      </Link>
+                      <Button type='submit' size='small'>
+                        Delete
+                      </Button>
+                    </Form>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <Link to={`/dashboard/${newRecipes._id}`}>
+                      <Button size='small'>Details</Button>{" "}
+                    </Link>
+                  </>
                 )}
               </CardActions>
             </Card>
@@ -121,3 +133,23 @@ function RecipeContainer() {
   );
 }
 export default RecipeContainer;
+
+// {loggedUser._id === newRecipes.createdBy ||
+//                   (loggedUser.role === "admin" ? (
+//                     <>
+//                       <Form
+//                         method='post'
+//                         action={`/dashboard/delete-job/${newRecipes._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+//                       >
+//                         <Button type='submit' size='small'>
+//                           Delete
+//                         </Button>
+//                       </Form>
+//                     </>
+//                   ) : (
+//                     <>
+//                       <Link to={`/dashboard/${newRecipes._id}`}>
+//                         <Button size='small'>Details</Button>
+//                       </Link>
+//                     </>
+//                   ))}

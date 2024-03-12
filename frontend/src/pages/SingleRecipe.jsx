@@ -49,18 +49,18 @@ function SingleRecipe() {
   // console.log(loggedUser);
 
   //state for logged user
-  const [loggedUser, setLoggedUser] = useState();
+  const [loggedUser, setLoggedUser] = useState({});
   //obtaining logged user to hide modify and delete btns
   useEffect(() => {
     async function user() {
       const foundUser = await axios.get("/api/admin/loggedUser");
       // console.log(foundUser.data.user);
-      setLoggedUser(foundUser.data.user._id);
+      setLoggedUser(foundUser.data.user);
     }
     user();
   }, []);
   console.log(loggedUser);
-  console.log(recipeData);
+  // console.log(recipeData);
   // console.log(loggedUser);
 
   return (
@@ -88,26 +88,54 @@ function SingleRecipe() {
               <RecipeInstructionCard />
             </IngredientContext.Provider>
           </CardContent>
-          {loggedUser === recipeData.data.singleRecipe.createdBy && (
-            <CardActions>
-              <Link
-                to={`/dashboard/edit-recipe/${recipeData.data.singleRecipe._id}`}
-              >
-                <Button size='small'>Modify</Button>
+          <CardActions>
+            {loggedUser.role === "admin" ||
+            loggedUser._id === recipeData.data.singleRecipe.createdBy ? (
+              <>
+                <Link
+                  to={`/dashboard/edit-recipe/${recipeData.data.singleRecipe._id}`}
+                >
+                  <Button size='small'>Modify</Button>
+                </Link>
+                <Form
+                  method='post'
+                  action={`/dashboard/delete-job/${recipeData.data.singleRecipe._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+                >
+                  <Button type='submit' size='small'>
+                    Delete
+                  </Button>
+                </Form>
+                <Link to={`/dashboard/all-recipe`}>
+                  <Button size='small'>Back</Button>
+                </Link>
+              </>
+            ) : (
+              <Link to={`/dashboard/all-recipe`}>
+                <Button size='small'>Back</Button>
               </Link>
-              <Form
-                method='post'
-                action={`/dashboard/delete-job/${recipeData.data.singleRecipe._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
-              >
-                <Button type='submit' size='small'>
-                  Delete
-                </Button>
-              </Form>
-            </CardActions>
-          )}
+            )}
+          </CardActions>
         </Card>
       </Container>
     </div>
   );
 }
 export default SingleRecipe;
+
+// {
+//   loggedUser === recipeData.data.singleRecipe.createdBy && (
+//     <CardActions>
+//       <Link to={`/dashboard/edit-recipe/${recipeData.data.singleRecipe._id}`}>
+//         <Button size='small'>Modify</Button>
+//       </Link>
+//       <Form
+//         method='post'
+//         action={`/dashboard/delete-job/${recipeData.data.singleRecipe._id}`} //path specified in the app.jsx to render the DeleteRecipe.jsx
+//       >
+//         <Button type='submit' size='small'>
+//           Delete
+//         </Button>
+//       </Form>
+//     </CardActions>
+//   );
+// }
