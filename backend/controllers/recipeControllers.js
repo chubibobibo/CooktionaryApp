@@ -39,8 +39,8 @@ export const createRecipe = async (req, res) => {
 //update: implementing query
 export const getAllRecipes = async (req, res) => {
   //implementing query
-  const { search, dish } = req.query;
-  console.log(req.query);
+  const { search, dish, sort } = req.query;
+  // console.log(sort);
   //object to use in the find query. empty string to retrun all recipes if no queries are found.
   const queryObj = {};
 
@@ -60,12 +60,26 @@ export const getAllRecipes = async (req, res) => {
     queryObj.dish = dish;
   }
 
-  const allRecipes = await RecipeModel.find(queryObj); //find all recipe, returns an array
+  //implement object for sorting
+  const sortingOptions = {
+    newest: "-createdAt",
+    oldest: "createdAt",
+    "a-z": "position",
+    "z-a": "-position",
+  };
+  console.log(sortingOptions[sort]);
+  //dynamically change how to sort
+  const sortingKey = sortingOptions[sort]; //using the query sort as it's key
+
+  const allRecipes = await RecipeModel.find(queryObj).sort(sortingKey); //find all recipe, returns an array
   // console.log(allRecipes);
   if (allRecipes.length === 0) {
     throw new ExpressError("No recipes found", 404);
   }
-  res.status(200).json({ message: "Recipes found", allRecipes });
+  res
+    .status(200)
+    .json({ message: "Recipes found", allRecipes })
+    .sort(sortingKey);
 };
 
 //get single recipe
