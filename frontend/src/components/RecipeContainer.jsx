@@ -63,7 +63,7 @@ function RecipeContainer() {
                 minWidth: 200,
                 maxWidth: 345,
                 maxHeight: 600,
-                minHeight: 650,
+                minHeight: 675,
               }}
               elevation={20}
               className={styles.cardContainer}

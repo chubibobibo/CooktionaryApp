@@ -51,6 +51,11 @@ app.use("/api/users/", userRoutes);
 app.use("/api/recipes/", authenticationMiddleware, recipeRoutes);
 app.use("/api/admin", authenticationMiddleware, adminRoutes); //authenticationMiddleware is needed because only logged in user can access all admin routes.To be able to obtain the logged user, we needed req.user object to be created and this only happens if we authenticate the admin route.
 
+//accessing index.html in the public folder for deploying
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./public", "index.html"));
+});
+
 //middleware for notfound page
 app.use("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });

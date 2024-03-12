@@ -41,7 +41,9 @@ function AllRecipe() {
   return (
     <Container maxWidth='xl'>
       <Box sx={{ flexGrow: 1 }}>
-        <SearchComponent />
+        <Grid>
+          <SearchComponent />
+        </Grid>
         <Grid container spacing={5}>
           <allRecipeContext.Provider value={{ allRecipe }}>
             {allRecipe?.data?.allRecipes ? (
